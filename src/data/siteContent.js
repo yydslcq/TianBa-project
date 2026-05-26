@@ -1,0 +1,124 @@
+export const navLinks = [
+  { href: '#home', label: '首页' },
+  { href: '#company', label: '关于我们' },
+  { href: '#solution', label: '解决方案' },
+  { href: '#cases', label: '平台案例' },
+  { href: '#experience', label: '能力体验' },
+  { href: '#cooperation', label: '合作模式' },
+];
+
+export const heroStats = [
+  { value: '110+', label: '合作收藏单位' },
+  { value: '30+', label: '自研专利' },
+];
+
+export const companyPoints = [
+  '湖南广电全资子公司，深耕内容传播、文化科技项目组织与公共文化服务。',
+  '自主建设运营数字文博大平台，聚焦文物数字资产管理、公众互动与平台应用。',
+  '具备数字文博领域多类资质，可提供政策咨询、项目咨询与建设路径支持。',
+];
+
+export const businessCards = [
+  {
+    title: '数字化采集',
+    desc: '基于摄影测量模式，完成图像、纹理、三维数据采集与模型重建。',
+    image: '/assets/business-digital-capture.png',
+  },
+  {
+    title: '资产管理',
+    desc: '支撑文物数字档案、元数据、存储、权限与安全管理。',
+    image: '/assets/business-asset-management.png',
+  },
+  {
+    title: '平台应用',
+    desc: '支持数字展陈、公众互动、文博应用与馆端服务场景。',
+    image: '/assets/business-platform-application.png',
+  },
+  {
+    title: '运营服务',
+    desc: '围绕授权使用、数字水印、内容传播与持续运营提供服务。',
+    image: '/assets/business-operation-service.png',
+  },
+];
+
+export const solutionPlans = [
+  {
+    id: 'capture',
+    no: '01',
+    tag: '采集重建',
+    title: '现场采集到三维重建',
+    desc: '覆盖现场采集、三维重建、贴图处理、质量验收与成果交付，先建立高质量数字化基础能力。',
+    tags: ['现场采集', '三维重建', '贴图处理', '质量验收', '成果交付'],
+    image: '/home-required-assets/采集现场图1.png',
+  },
+  {
+    id: 'asset',
+    no: '02',
+    tag: '资产治理',
+    title: '数据治理与资产化',
+    desc: '围绕标注体系、元数据组织、质检规则、权限管理、数字档案与资产包，让文件成果走向可管理资产。',
+    tags: ['标注体系', '元数据组织', '质检规则', '权限管理', '数字档案'],
+    image: '/home-required-assets/文博档案管理平台截图.png',
+  },
+  {
+    id: 'flow',
+    no: '03',
+    tag: '应用流通',
+    title: '应用与可信流通',
+    desc: '依托山海平台、内容应用、授权出库、定制水印、使用留痕与审计管理，支撑安全复用和公共服务。',
+    tags: ['山海平台', '内容应用', '授权出库', '数字水印', '审计管理'],
+    image: '/home-required-assets/流通运营管理平台截图.png',
+  },
+];
+
+export const deviceCards = [
+  {
+    id: '01',
+    title: '光场轨道采集系统',
+    desc: '多机位同步采集，适用于稳定轨道化作业场景。',
+    image: '/home-assets/device-01.png',
+  },
+  {
+    id: '02',
+    title: '移动便携采集箱',
+    desc: '便携部署，适合现场快速搭建与多场景采集。',
+    image: '/home-assets/device-02.png',
+  },
+  {
+    id: '03',
+    title: '机械臂采集台',
+    desc: '机械结构配合工业相机，实现高精度自动化采集。',
+    image: '/home-assets/device-03.png',
+  },
+];
+
+export const platformScreens = [
+  { image: '/home-required-assets/采集管理平台截图.png', label: '采集管理' },
+  { image: '/home-required-assets/文博档案管理平台截图.png', label: '档案管理' },
+  { image: '/home-required-assets/山海云枢截图.png', label: '山海云枢' },
+  { image: '/home-required-assets/流通运营管理平台截图.png', label: '流通运营' },
+  { image: '/home-required-assets/山海app首页.png', label: '山海 App' },
+  { image: '/home-required-assets/山海app文物列表页.png', label: '文物列表' },
+];
+
+export const caseCards = [
+  { title: '高精度三维模型', desc: '证明复杂器物的模型重建和材质保留能力。', image: '/home-required-assets/三维模型截图2.png' },
+  { title: '辛追夫人晚宴', desc: '证明文化 IP 内容转译和沉浸式传播能力。', image: '/home-required-assets/案例-辛追夫人晚宴宣传图.png' },
+  { title: '丝绸之路相', desc: '证明专题内容策划与视觉传播能力。', image: '/home-required-assets/案例-丝绸之路（相）宣传图.png' },
+  { title: '昆明市博物馆一码服务', desc: '证明馆端公共服务和移动访问承接能力。', image: '/home-required-assets/案例-昆明市博物馆一馆一码.png' },
+  { title: '山海亲子寻宝', desc: '证明公众互动和活动运营能力。', image: '/home-required-assets/案例-山海亲子寻宝3.png' },
+  { title: '文创互动', desc: '证明授权衍生和数字内容运营能力。', image: '/home-required-assets/案例-冰箱贴1.png' },
+];
+
+export const cooperationSteps = [
+  { title: '重点馆藏试点', desc: '从一批重点文物开始，建立采集重建与质量验收样板。' },
+  { title: '专题项目建设', desc: '围绕展陈、研究或公众服务主题，形成可交付项目闭环。' },
+  { title: '整体平台建设', desc: '接入资产管理、应用发布、授权流通与运营服务能力。' },
+  { title: '持续运营扩展', desc: '让文物数据进入长期维护、内容更新和可信使用机制。' },
+];
+
+export const partnerGroups = [
+  { title: '收藏单位', tags: ['湖南博物院', '长沙博物馆', '湖南省文物考古研究院', '岳麓书院', '地方专题馆'] },
+  { title: '研究单位', tags: ['文博研究团队', '数字媒体实验室', '文化遗产研究中心', '高校艺术学院', '数据治理研究方向'] },
+  { title: '内容伙伴', tags: ['数字内容创作者', '传统工艺创作者', '展陈视觉合作方', '文化科技项目组织方'] },
+];
