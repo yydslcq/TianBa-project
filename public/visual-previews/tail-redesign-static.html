@@ -1,0 +1,1353 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>山海官网后半段静态原型</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --case-bg: #081012;
+        --case-text: #edf7f4;
+        --case-muted: rgba(220, 239, 236, 0.62);
+        --accent-cyan: #7ce7ea;
+        --accent-cyan-soft: rgba(124, 231, 234, 0.26);
+        --co-op-bg: #eceeea;
+        --co-op-ink: #142522;
+        --co-op-muted: rgba(20, 37, 34, 0.68);
+        --co-op-line: rgba(18, 48, 46, 0.16);
+        --partner-bg: #060b0c;
+        --partner-card: rgba(232, 243, 241, 0.045);
+        --partner-line: rgba(232, 243, 241, 0.08);
+        --contact-bg: #060b0d;
+        --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+        --shell: min(1360px, calc(100% - 96px));
+        --serif: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+        --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-width: 320px;
+        overflow-x: clip;
+        scroll-behavior: smooth;
+        background: var(--partner-bg);
+      }
+
+      body {
+        min-width: 320px;
+        margin: 0;
+        overflow-x: clip;
+        color: var(--case-text);
+        background: var(--partner-bg);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input,
+      textarea {
+        font: inherit;
+      }
+
+      img,
+      video {
+        display: block;
+        max-width: 100%;
+      }
+
+      .shell {
+        width: var(--shell);
+        margin-inline: auto;
+      }
+
+      .prototype-nav {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        z-index: 30;
+        display: flex;
+        width: min(560px, calc(100% - 40px));
+        height: 54px;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 6px;
+        border: 1px solid rgba(226, 245, 238, 0.1);
+        border-radius: 16px;
+        background: rgba(5, 10, 12, 0.78);
+        box-shadow: 0 12px 38px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(18px);
+        transform: translateX(-50%);
+      }
+
+      .prototype-nav a {
+        position: relative;
+        display: grid;
+        height: 42px;
+        flex: 1;
+        place-items: center;
+        color: rgba(226, 245, 238, 0.54);
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        transition: color 260ms ease;
+      }
+
+      .prototype-nav a::after {
+        position: absolute;
+        right: 18px;
+        bottom: 2px;
+        left: 18px;
+        height: 2px;
+        border-radius: 2px;
+        content: "";
+        background: var(--accent-cyan);
+        opacity: 0;
+        transform: scaleX(0.25);
+        transition:
+          opacity 260ms ease,
+          transform 460ms var(--ease-premium);
+      }
+
+      .prototype-nav a:hover,
+      .prototype-nav a.is-active {
+        color: #e5faf9;
+      }
+
+      .prototype-nav a.is-active::after {
+        opacity: 0.86;
+        transform: scaleX(1);
+      }
+
+      .section-title {
+        margin: 0;
+        font-family: var(--serif);
+        font-size: clamp(42px, 5.2vw, 76px);
+        font-weight: 500;
+        letter-spacing: -0.1em;
+        line-height: 1.08;
+      }
+
+      .section-lead {
+        margin: 0;
+        font-size: 16px;
+        letter-spacing: 0.08em;
+        line-height: 1.9;
+      }
+
+      .cases {
+        position: relative;
+        min-height: 980px;
+        overflow: hidden;
+        padding: 142px 0 130px;
+        background:
+          radial-gradient(circle at 76% 5%, rgba(26, 80, 83, 0.22), transparent 33rem),
+          radial-gradient(circle at 2% 60%, rgba(11, 49, 58, 0.22), transparent 34rem),
+          linear-gradient(145deg, #07151a, #040b0e 58%, #071419);
+      }
+
+      .cases::before,
+      .cases::after {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+      }
+
+      .cases::before {
+        opacity: 0.3;
+        background-image:
+          linear-gradient(rgba(136, 195, 191, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(136, 195, 191, 0.025) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: linear-gradient(to bottom, black, transparent 94%);
+      }
+
+      .cases::after {
+        background: linear-gradient(180deg, rgba(6, 13, 16, 0.14), transparent 28%, rgba(4, 11, 14, 0.38));
+      }
+
+      .cases .shell {
+        position: relative;
+        z-index: 1;
+      }
+
+      .cases-heading {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 14px;
+        align-items: end;
+        margin-bottom: 64px;
+      }
+
+      .cases-heading .section-title {
+        grid-column: 1 / 9;
+        max-width: none;
+        font-size: clamp(42px, 4.8vw, 70px);
+        white-space: nowrap;
+      }
+
+      .cases-heading .section-lead {
+        grid-column: 10 / 13;
+        margin-bottom: 7px;
+        color: var(--case-muted);
+      }
+
+      .case-gallery {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        grid-auto-rows: 42px;
+        gap: 14px;
+      }
+
+      .case-tile {
+        position: relative;
+        min-height: 0;
+        overflow: hidden;
+        border: 1px solid rgba(112, 184, 181, 0.2);
+        border-radius: 2px;
+        outline: none;
+        background: #08191f;
+        transition:
+          border-color 500ms var(--ease-premium),
+          transform 620ms var(--ease-premium);
+      }
+
+      .case-tile::after {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+        background:
+          linear-gradient(180deg, rgba(3, 11, 15, 0.03) 12%, rgba(3, 11, 15, 0.38) 62%, rgba(3, 11, 15, 0.94)),
+          linear-gradient(90deg, rgba(3, 11, 15, 0.18), transparent 58%);
+      }
+
+      .case-tile:hover,
+      .case-tile:focus-visible,
+      .case-tile.is-open {
+        z-index: 3;
+        border-color: rgba(124, 231, 234, 0.52);
+        transform: scale(1.035);
+      }
+
+      .case-tile--river {
+        grid-column: 1 / 8;
+        grid-row: 1 / 7;
+      }
+
+      .case-tile--xinchui {
+        grid-column: 8 / 13;
+        grid-row: 1 / 7;
+      }
+
+      .case-tile--kunming {
+        grid-column: 1 / 4;
+        grid-row: 7 / 17;
+      }
+
+      .case-tile--treasure {
+        grid-column: 4 / 7;
+        grid-row: 7 / 17;
+      }
+
+      .case-tile--silk {
+        grid-column: 7 / 13;
+        grid-row: 7 / 13;
+      }
+
+      .case-tile--print {
+        grid-column: 7 / 13;
+        grid-row: 13 / 17;
+      }
+
+      .case-media,
+      .case-media img,
+      .case-media video {
+        width: 100%;
+        height: 100%;
+      }
+
+      .case-media {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      .case-media img,
+      .case-media video {
+        object-fit: cover;
+        filter: saturate(0.7) contrast(1.04) brightness(0.82);
+        transform: scale(1.002);
+        transition:
+          filter 620ms var(--ease-premium),
+          transform 620ms var(--ease-premium);
+      }
+
+      .case-tile:hover .case-media img,
+      .case-tile:hover .case-media video,
+      .case-tile:focus-visible .case-media img,
+      .case-tile:focus-visible .case-media video,
+      .case-tile.is-open .case-media img,
+      .case-tile.is-open .case-media video {
+        filter: saturate(0.88) contrast(1.02) brightness(0.96);
+        transform: scale(1.03);
+      }
+
+      .case-tile--river img {
+        object-position: center 54%;
+      }
+
+      .case-tile--xinchui img {
+        object-position: center 42%;
+      }
+
+      .case-tile--kunming img,
+      .case-tile--treasure img {
+        object-position: center top;
+      }
+
+      .print-media {
+        display: grid;
+        grid-template-columns: 1.42fr 0.9fr 0.9fr;
+        gap: 2px;
+      }
+
+      .case-copy {
+        position: absolute;
+        z-index: 2;
+        right: 26px;
+        bottom: 24px;
+        left: 26px;
+      }
+
+      .case-type {
+        margin: 0 0 7px;
+        color: #a7c5c4;
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        line-height: 1.4;
+      }
+
+      .case-name {
+        margin: 0;
+        color: #edf4f3;
+        font-family: var(--serif);
+        font-size: clamp(24px, 2vw, 34px);
+        font-weight: 500;
+        letter-spacing: -0.04em;
+        line-height: 1.16;
+      }
+
+      .case-description {
+        max-height: 0;
+        max-width: 36em;
+        margin: 0;
+        overflow: hidden;
+        color: #cad9d8;
+        font-size: 13px;
+        letter-spacing: 0.07em;
+        line-height: 1.75;
+        opacity: 0;
+        transform: translateY(10px);
+        transition:
+          max-height 520ms var(--ease-premium),
+          margin 520ms var(--ease-premium),
+          opacity 360ms ease,
+          transform 520ms var(--ease-premium);
+      }
+
+      .case-tile:hover .case-description,
+      .case-tile:focus-visible .case-description,
+      .case-tile.is-open .case-description {
+        max-height: 5em;
+        margin-top: 12px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .cooperation {
+        position: relative;
+        min-height: 620px;
+        overflow: hidden;
+        padding: 118px 0 124px;
+        color: var(--co-op-ink);
+        background:
+          radial-gradient(circle at 84% 0%, rgba(213, 224, 225, 0.86), transparent 28rem),
+          linear-gradient(135deg, #f7f9f8 0%, var(--co-op-bg) 58%, #f5f7f5 100%);
+      }
+
+      .cooperation::before {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+        opacity: 0.35;
+        background-image:
+          linear-gradient(rgba(124, 144, 147, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(124, 144, 147, 0.06) 1px, transparent 1px);
+        background-size: 100% 64px, 64px 100%;
+        mask-image: linear-gradient(90deg, transparent, #000 28%, #000 82%, transparent);
+      }
+
+      .cooperation .shell {
+        position: relative;
+      }
+
+      .cooperation-intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+        gap: 48px;
+        align-items: end;
+      }
+
+      .cooperation .section-title {
+        max-width: 11em;
+        color: var(--co-op-ink);
+      }
+
+      .cooperation .section-lead {
+        max-width: 31em;
+        margin-bottom: 7px;
+        color: var(--co-op-muted);
+      }
+
+      .cooperation-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: 72px;
+        border-block: 1px solid var(--co-op-line);
+      }
+
+      .cooperation-item {
+        min-height: 236px;
+        padding: 30px 26px 34px;
+        border-left: 1px solid var(--co-op-line);
+        transition:
+          background-color 360ms var(--ease-premium),
+          transform 360ms var(--ease-premium);
+      }
+
+      .cooperation-item:first-child {
+        border-left: 0;
+      }
+
+      .cooperation-item::before {
+        display: block;
+        width: 32px;
+        height: 1px;
+        margin-bottom: 58px;
+        content: "";
+        background: rgba(18, 76, 73, 0.48);
+        transform-origin: left;
+        transition: transform 360ms var(--ease-premium);
+      }
+
+      .cooperation-item:hover {
+        background: rgba(196, 218, 213, 0.22);
+        transform: translateY(-4px);
+      }
+
+      .cooperation-item:hover::before {
+        transform: scaleX(2);
+      }
+
+      .cooperation-item h3 {
+        margin: 0;
+        color: var(--co-op-ink);
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -0.055em;
+      }
+
+      .cooperation-item p {
+        max-width: 245px;
+        margin: 18px 0 0;
+        color: rgba(20, 37, 34, 0.66);
+        font-size: 15px;
+        line-height: 1.9;
+      }
+
+      .partners {
+        position: relative;
+        min-height: 700px;
+        overflow: hidden;
+        padding: 124px 0 112px;
+        color: var(--case-text);
+        background:
+          linear-gradient(180deg, rgba(236, 238, 234, 0.05), transparent 72px),
+          radial-gradient(circle at 10% 8%, rgba(76, 112, 114, 0.14), transparent 28rem),
+          linear-gradient(155deg, #0d1516, var(--partner-bg) 58%);
+      }
+
+      .partners::before {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+        opacity: 0.2;
+        background-image: linear-gradient(112deg, transparent 0 50%, rgba(221, 231, 231, 0.08) 50.1%, transparent 50.3%);
+        background-size: 46px 46px;
+      }
+
+      .partners-intro {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 54px;
+        align-items: end;
+      }
+
+      .partners .section-title {
+        max-width: 10.5em;
+      }
+
+      .partners .section-lead {
+        margin-bottom: 7px;
+        color: var(--case-muted);
+      }
+
+      .partners-viewport {
+        position: relative;
+        margin-top: 74px;
+        overflow: hidden;
+        border-block: 1px solid var(--partner-line);
+        mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+      }
+
+      .partners-row {
+        overflow: hidden;
+        padding: 20px 0;
+      }
+
+      .partners-row + .partners-row {
+        border-top: 1px solid var(--partner-line);
+      }
+
+      .partners-track,
+      .logo-sequence {
+        display: flex;
+        width: max-content;
+      }
+
+      .partners-track {
+        will-change: transform;
+      }
+
+      .partners-row:first-child .partners-track {
+        animation: marquee-forward 48s linear infinite;
+      }
+
+      .partners-row:last-child .partners-track {
+        margin-left: -92px;
+        animation: marquee-reverse 54s linear infinite;
+      }
+
+      .partners-viewport:hover .partners-track {
+        animation-play-state: paused;
+      }
+
+      .logo-sequence {
+        flex: none;
+        gap: 16px;
+        padding-right: 16px;
+      }
+
+      .partner-mark {
+        display: grid;
+        width: 224px;
+        height: 96px;
+        place-items: center;
+        overflow: hidden;
+        border: 1px solid var(--partner-line);
+        border-radius: 8px;
+        background: rgba(232, 243, 241, 0.92);
+        transition:
+          background-color 300ms var(--ease-premium),
+          transform 300ms var(--ease-premium);
+      }
+
+      .partner-mark img {
+        display: block;
+        max-width: 176px;
+        max-height: 58px;
+        object-fit: contain;
+        filter: grayscale(1) saturate(0.18) contrast(0.88);
+        opacity: 0.68;
+        transition:
+          filter 300ms var(--ease-premium),
+          opacity 300ms var(--ease-premium);
+      }
+
+      .partner-mark:hover {
+        background: rgba(255, 255, 255, 0.98);
+        transform: translate3d(0, -3px, 0);
+      }
+
+      .partner-mark:hover img {
+        filter: grayscale(0) saturate(0.92) contrast(1);
+        opacity: 1;
+      }
+
+      .contact {
+        position: relative;
+        min-height: 620px;
+        padding: 112px 0 96px;
+        color: var(--case-text);
+        background:
+          linear-gradient(180deg, rgba(232, 243, 241, 0.08), transparent 1px),
+          radial-gradient(circle at 15% 15%, rgba(30, 77, 107, 0.18), transparent 34rem),
+          radial-gradient(circle at 92% 88%, rgba(18, 55, 82, 0.14), transparent 31rem),
+          linear-gradient(135deg, #03090f, var(--contact-bg) 52%, #071421);
+      }
+
+      .contact::before {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+        opacity: 0.36;
+        background-image:
+          linear-gradient(rgba(146, 192, 220, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(146, 192, 220, 0.025) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+      }
+
+      .contact-layout {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+        gap: 72px;
+        align-items: center;
+      }
+
+      .contact .section-title {
+        max-width: 8em;
+      }
+
+      .contact .section-lead {
+        max-width: 31em;
+        margin-top: 28px;
+        color: rgba(220, 239, 236, 0.7);
+      }
+
+      .contact-details {
+        display: grid;
+        margin-top: 46px;
+        border-top: 1px solid rgba(134, 179, 213, 0.2);
+      }
+
+      .contact-details p {
+        display: grid;
+        grid-template-columns: 4.75em minmax(0, 1fr);
+        gap: 16px;
+        margin: 0;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(134, 179, 213, 0.2);
+        color: rgba(220, 239, 236, 0.66);
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .contact-details span {
+        color: rgba(220, 239, 236, 0.44);
+      }
+
+      .contact-details a,
+      .contact-details strong {
+        width: fit-content;
+        color: var(--case-text);
+        font-weight: 600;
+      }
+
+      .form-panel {
+        max-width: 560px;
+        justify-self: end;
+        padding: 30px;
+        border: 1px solid rgba(246, 250, 247, 0.12);
+        border-radius: 18px;
+        background: rgba(246, 250, 247, 0.035);
+      }
+
+      .contact-form,
+      .field,
+      .actions {
+        display: grid;
+      }
+
+      .contact-form {
+        gap: 19px;
+      }
+
+      .field {
+        gap: 8px;
+      }
+
+      .field label {
+        color: rgba(220, 239, 236, 0.66);
+        font-size: 14px;
+        letter-spacing: 0.08em;
+      }
+
+      .field input,
+      .field textarea {
+        width: 100%;
+        border: 1px solid rgba(134, 179, 213, 0.19);
+        border-radius: 9px;
+        outline: none;
+        color: var(--case-text);
+        background: rgba(2, 11, 19, 0.56);
+        font-size: 15px;
+        line-height: 1.6;
+        transition:
+          border-color 180ms ease,
+          background-color 180ms ease;
+      }
+
+      .field input {
+        height: 48px;
+        padding-inline: 15px;
+      }
+
+      .field textarea {
+        min-height: 126px;
+        padding: 12px 15px;
+        resize: vertical;
+      }
+
+      .field input:focus,
+      .field textarea:focus {
+        border-color: rgba(134, 184, 213, 0.72);
+        background: rgba(5, 18, 30, 0.88);
+      }
+
+      .textarea-meta {
+        justify-self: end;
+        color: rgba(220, 239, 236, 0.44);
+        font-size: 12px;
+        letter-spacing: 0.06em;
+      }
+
+      .actions {
+        gap: 13px;
+        padding-top: 3px;
+      }
+
+      .submit-button {
+        min-height: 50px;
+        border: 1px solid rgba(172, 211, 230, 0.48);
+        border-radius: 8px;
+        color: #eaf7fc;
+        background: rgba(75, 128, 159, 0.38);
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        transition:
+          background-color 180ms ease,
+          border-color 180ms ease,
+          transform 180ms ease;
+      }
+
+      .submit-button:hover,
+      .submit-button:focus-visible {
+        border-color: rgba(172, 211, 230, 0.76);
+        background: rgba(82, 142, 176, 0.56);
+      }
+
+      .submit-button:active {
+        transform: translateY(1px);
+      }
+
+      .form-status {
+        min-height: 1.65em;
+        margin: 0;
+        color: #acd3e6;
+        font-size: 14px;
+        line-height: 1.65;
+      }
+
+      @keyframes marquee-forward {
+        from {
+          transform: translate3d(0, 0, 0);
+        }
+        to {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+
+      @keyframes marquee-reverse {
+        from {
+          transform: translate3d(-50%, 0, 0);
+        }
+        to {
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      @media (max-width: 1099px) {
+        :root {
+          --shell: min(100% - 48px, 980px);
+        }
+
+        .cases-heading,
+        .cooperation-intro,
+        .partners-intro {
+          grid-template-columns: 1fr;
+          gap: 22px;
+        }
+
+        .cases-heading .section-title,
+        .cases-heading .section-lead {
+          grid-column: auto;
+        }
+
+        .cases-heading .section-title {
+          white-space: normal;
+        }
+
+        .cases-heading .section-lead {
+          max-width: 32em;
+        }
+
+        .case-gallery {
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          grid-auto-rows: 42px;
+        }
+
+        .case-tile--river {
+          grid-column: 1 / 5;
+          grid-row: 1 / 7;
+        }
+
+        .case-tile--xinchui {
+          grid-column: 5 / 7;
+          grid-row: 1 / 7;
+        }
+
+        .case-tile--kunming {
+          grid-column: 1 / 3;
+          grid-row: 7 / 16;
+        }
+
+        .case-tile--treasure {
+          grid-column: 3 / 5;
+          grid-row: 7 / 16;
+        }
+
+        .case-tile--silk {
+          grid-column: 5 / 7;
+          grid-row: 7 / 12;
+        }
+
+        .case-tile--print {
+          grid-column: 5 / 7;
+          grid-row: 12 / 16;
+        }
+
+        .cooperation-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          margin-top: 52px;
+        }
+
+        .cooperation-item:nth-child(3) {
+          border-left: 0;
+        }
+
+        .cooperation-item:nth-child(n + 3) {
+          border-top: 1px solid var(--co-op-line);
+        }
+
+        .partners-intro {
+          gap: 22px;
+        }
+
+        .partners .section-lead {
+          max-width: 34em;
+        }
+      }
+
+      @media (max-width: 767px) {
+        :root {
+          --shell: min(100% - 36px, 560px);
+        }
+
+        .section-title {
+          font-size: clamp(38px, 11vw, 54px);
+        }
+
+        .prototype-nav {
+          top: auto;
+          right: 12px;
+          bottom: 12px;
+          left: 12px;
+          width: auto;
+          height: 54px;
+          transform: none;
+        }
+
+        .prototype-nav a {
+          font-size: 12px;
+          letter-spacing: 0;
+        }
+
+        .prototype-nav a::after {
+          right: 12px;
+          left: 12px;
+        }
+
+        .cases,
+        .cooperation,
+        .partners,
+        .contact {
+          min-height: auto;
+        }
+
+        .cases {
+          padding: 82px 0 76px;
+        }
+
+        .cases-heading {
+          margin-bottom: 32px;
+        }
+
+        .case-gallery {
+          display: block;
+        }
+
+        .case-tile {
+          margin-top: 12px;
+          aspect-ratio: 1 / 0.78;
+        }
+
+        .case-tile:first-child {
+          margin-top: 0;
+        }
+
+        .case-tile--kunming,
+        .case-tile--treasure {
+          aspect-ratio: 1 / 1.08;
+        }
+
+        .case-tile--print {
+          aspect-ratio: 1 / 0.64;
+        }
+
+        .case-copy {
+          right: 18px;
+          bottom: 16px;
+          left: 18px;
+        }
+
+        .case-name {
+          font-size: 28px;
+        }
+
+        .cooperation {
+          padding: 78px 0 84px;
+        }
+
+        .cooperation-grid {
+          grid-template-columns: 1fr;
+          margin-top: 44px;
+        }
+
+        .cooperation-item,
+        .cooperation-item:nth-child(3) {
+          min-height: auto;
+          padding: 24px 0 26px;
+          border-top: 1px solid var(--co-op-line);
+          border-left: 0;
+        }
+
+        .cooperation-item:first-child {
+          border-top: 0;
+        }
+
+        .cooperation-item::before {
+          margin-bottom: 28px;
+        }
+
+        .partners {
+          padding: 82px 0 86px;
+        }
+
+        .partners-viewport {
+          width: var(--shell);
+          margin: 42px auto 0;
+          border-block: 0;
+          mask-image: none;
+        }
+
+        .partners-row {
+          display: contents;
+        }
+
+        .partners-track,
+        .logo-sequence {
+          display: contents;
+        }
+
+        .partners-viewport {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+        }
+
+        .logo-sequence[aria-hidden="true"] {
+          display: none;
+        }
+
+        .logo-sequence:not([aria-hidden]) .partner-mark:nth-child(n + 9) {
+          display: none;
+        }
+
+        .partner-mark {
+          width: 100%;
+          height: 76px;
+        }
+
+        .partner-mark img {
+          max-width: 126px;
+          max-height: 42px;
+        }
+
+        .contact {
+          padding: 82px 0 82px;
+        }
+
+        .contact-layout {
+          grid-template-columns: 1fr;
+          gap: 42px;
+        }
+
+        .form-panel {
+          max-width: none;
+          justify-self: stretch;
+          padding: 24px 20px 22px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .partners-viewport {
+          display: grid;
+          width: var(--shell);
+          margin-inline: auto;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+          border-block: 0;
+          mask-image: none;
+        }
+
+        .partners-row,
+        .partners-track,
+        .logo-sequence {
+          display: contents;
+        }
+
+        .logo-sequence[aria-hidden="true"] {
+          display: none;
+        }
+
+        .logo-sequence:not([aria-hidden]) .partner-mark:nth-child(n + 13) {
+          display: none;
+        }
+
+        .partner-mark {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="prototype-nav" aria-label="原型分区导航">
+      <a class="is-active" href="#cases">应用案例</a>
+      <a href="#cooperation">合作模式</a>
+      <a href="#partners">合作伙伴</a>
+      <a href="#contact">联系咨询</a>
+    </nav>
+
+    <main>
+      <section class="cases" id="cases" aria-labelledby="cases-title">
+        <div class="shell">
+          <header class="cases-heading">
+            <h1 class="section-title" id="cases-title">从数据资产到文化体验</h1>
+            <p class="section-lead">让文物数据进入内容传播、公共服务与实体转化。</p>
+          </header>
+
+          <div class="case-gallery" aria-label="文化体验应用案例">
+            <article class="case-tile case-tile--river" tabindex="0" aria-label="专题传播，因为长江">
+              <div class="case-media"><img src="/assets/cases/yangtze.png" alt="因为长江文化内容画面" /></div>
+              <div class="case-copy">
+                <p class="case-type">专题传播</p>
+                <h2 class="case-name">因为长江</h2>
+                <p class="case-description">让长江文化进入数字内容叙事。</p>
+              </div>
+            </article>
+
+            <article class="case-tile case-tile--xinchui" tabindex="0" aria-label="沉浸内容，辛追夫人晚宴">
+              <div class="case-media"><img src="/assets/cases/xinchui-banquet.png" alt="辛追夫人晚宴数字叙事画面" /></div>
+              <div class="case-copy">
+                <p class="case-type">沉浸内容</p>
+                <h2 class="case-name">辛追夫人晚宴</h2>
+                <p class="case-description">以数字资产延展文化故事体验。</p>
+              </div>
+            </article>
+
+            <article class="case-tile case-tile--kunming" tabindex="0" aria-label="公共服务，昆明一码服务">
+              <div class="case-media"><img src="/assets/cases/kunming-code.png" alt="昆明一码服务应用画面" /></div>
+              <div class="case-copy">
+                <p class="case-type">公共服务</p>
+                <h2 class="case-name">昆明一码服务</h2>
+                <p class="case-description">用一码服务连接馆藏与公众。</p>
+              </div>
+            </article>
+
+            <article class="case-tile case-tile--treasure" tabindex="0" aria-label="互动运营，山海亲子寻宝">
+              <div class="case-media"><img src="/assets/cases/shanhai-treasure.png" alt="山海亲子寻宝体验画面" /></div>
+              <div class="case-copy">
+                <p class="case-type">互动运营</p>
+                <h2 class="case-name">山海亲子寻宝</h2>
+                <p class="case-description">以互动任务激活亲子参观。</p>
+              </div>
+            </article>
+
+            <article class="case-tile case-tile--silk" tabindex="0" aria-label="动态影像，丝绸之路相">
+              <div class="case-media">
+                <video muted loop playsinline preload="metadata" poster="/assets/cases/silk-road-poster.png" aria-label="丝绸之路相影像片段">
+                  <source src="/assets/cases/silk-road.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="case-copy">
+                <p class="case-type">动态影像</p>
+                <h2 class="case-name">丝绸之路相</h2>
+                <p class="case-description">用动态影像承接专题传播。</p>
+              </div>
+            </article>
+
+            <article class="case-tile case-tile--print" tabindex="0" aria-label="实体转化，文创打印">
+              <div class="case-media print-media">
+                <img src="/assets/cases/print-01.png" alt="文创打印成品之一" />
+                <img src="/assets/cases/print-02.png" alt="文创打印成品之二" />
+                <img src="/assets/cases/print-03.png" alt="文创打印成品之三" />
+              </div>
+              <div class="case-copy">
+                <p class="case-type">实体转化</p>
+                <h2 class="case-name">文创打印</h2>
+                <p class="case-description">让数字纹样转化为可带走的文创。</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cooperation" id="cooperation" aria-labelledby="cooperation-title">
+        <div class="shell">
+          <header class="cooperation-intro">
+            <h2 class="section-title" id="cooperation-title">多种合作方式，匹配不同建设需求</h2>
+            <p class="section-lead">可从具体项目切入，也可组合形成完整建设方案。</p>
+          </header>
+
+          <div class="cooperation-grid">
+            <article class="cooperation-item">
+              <h3>馆藏数字化合作</h3>
+              <p>围绕重点馆藏，完成采集重建、质量验收与数据交付。</p>
+            </article>
+            <article class="cooperation-item">
+              <h3>专题策展合作</h3>
+              <p>围绕展览主题，组织数字内容、互动体验与传播应用。</p>
+            </article>
+            <article class="cooperation-item">
+              <h3>平台共建合作</h3>
+              <p>结合馆端需求，建设资产管理、应用发布与服务入口。</p>
+            </article>
+            <article class="cooperation-item">
+              <h3>运营共创合作</h3>
+              <p>围绕内容更新、公众触达与授权使用，持续拓展场景。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="partners" id="partners" aria-labelledby="partners-title">
+        <header class="shell partners-intro">
+          <h2 class="section-title" id="partners-title">与文博伙伴，共建数字文化新场景</h2>
+          <p class="section-lead">与收藏单位、研究机构和文化伙伴持续协作，让数据能力进入真实场景。</p>
+        </header>
+        <div class="partners-viewport" aria-label="文博合作伙伴标识墙"></div>
+      </section>
+
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="shell contact-layout">
+          <section>
+            <h2 class="section-title" id="contact-title">与我们共建数字文博新场景</h2>
+            <p class="section-lead">欢迎从馆藏数字化、专题内容或平台建设中的一个具体需求开始。</p>
+            <div class="contact-details" aria-label="联系信息">
+              <p><span>联系人</span><strong>刘春前 / 产品经理</strong></p>
+              <p><span>手机</span><a href="tel:19911531345">19911531345</a></p>
+              <p><span>邮箱</span><a href="mailto:liuchunqian@shuziwenbo.cn">liuchunqian@shuziwenbo.cn</a></p>
+            </div>
+          </section>
+
+          <section class="form-panel" aria-label="咨询表单">
+            <form class="contact-form" id="consult-form">
+              <div class="field">
+                <label for="name">姓名</label>
+                <input id="name" name="name" type="text" autocomplete="name" required />
+              </div>
+              <div class="field">
+                <label for="phone">电话</label>
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
+              </div>
+              <div class="field">
+                <label for="requirement">需求简述</label>
+                <textarea id="requirement" name="requirement" maxlength="200" required></textarea>
+                <div class="textarea-meta" aria-hidden="true"><span id="count">0</span>/200</div>
+              </div>
+              <div class="actions">
+                <button class="submit-button" type="submit">提交咨询</button>
+                <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+              </div>
+            </form>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (() => {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const tileNodes = document.querySelectorAll(".case-tile");
+        const silkRoadVideo = document.querySelector(".case-tile--silk video");
+        const navLinks = document.querySelectorAll(".prototype-nav a");
+        const observedSections = document.querySelectorAll("main > section[id]");
+        const requirement = document.querySelector("#requirement");
+        const count = document.querySelector("#count");
+        const form = document.querySelector("#consult-form");
+        const status = document.querySelector("#form-status");
+        const partnerViewport = document.querySelector(".partners-viewport");
+        const pngPartners = new Set([27, 33, 37, 45]);
+
+        const partnerPath = (index) => {
+          const stem = String(index).padStart(3, "0");
+          return `/assets/partners/partner-${stem}.${pngPartners.has(index) ? "png" : "jpg"}`;
+        };
+
+        const createSequence = (indexes, isDuplicate = false) => {
+          const sequence = document.createElement("div");
+          sequence.className = "logo-sequence";
+          if (isDuplicate) sequence.setAttribute("aria-hidden", "true");
+          indexes.forEach((index) => {
+            const mark = document.createElement("div");
+            mark.className = "partner-mark";
+            const image = document.createElement("img");
+            image.src = partnerPath(index);
+            image.alt = isDuplicate ? "" : `合作伙伴标识 ${String(index).padStart(3, "0")}`;
+            image.loading = "lazy";
+            mark.append(image);
+            sequence.append(mark);
+          });
+          return sequence;
+        };
+
+        const createPartnerRow = (indexes) => {
+          const row = document.createElement("div");
+          row.className = "partners-row";
+          const track = document.createElement("div");
+          track.className = "partners-track";
+          track.append(createSequence(indexes), createSequence(indexes, true));
+          row.append(track);
+          return row;
+        };
+
+        if (partnerViewport) {
+          partnerViewport.append(
+            createPartnerRow(Array.from({ length: 26 }, (_, index) => index + 1)),
+            createPartnerRow(Array.from({ length: 25 }, (_, index) => index + 27))
+          );
+        }
+
+        tileNodes.forEach((tile) => {
+          tile.addEventListener("click", () => {
+            tileNodes.forEach((other) => {
+              if (other !== tile) other.classList.remove("is-open");
+            });
+            tile.classList.toggle("is-open");
+          });
+        });
+
+        let lastVideoEntry;
+
+        const syncVideo = (entry) => {
+          lastVideoEntry = entry;
+          if (!silkRoadVideo || reduceMotion.matches) {
+            silkRoadVideo?.pause();
+            return;
+          }
+          if (entry.isIntersecting) silkRoadVideo.play().catch(() => {});
+          else silkRoadVideo.pause();
+        };
+
+        if (silkRoadVideo && "IntersectionObserver" in window) {
+          const videoObserver = new IntersectionObserver(([entry]) => syncVideo(entry), { threshold: 0.35 });
+          videoObserver.observe(silkRoadVideo);
+        }
+
+        reduceMotion.addEventListener?.("change", () => {
+          if (reduceMotion.matches) silkRoadVideo?.pause();
+          else if (lastVideoEntry) syncVideo(lastVideoEntry);
+        });
+
+        if ("IntersectionObserver" in window) {
+          const navObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                navLinks.forEach((link) => link.classList.toggle("is-active", link.hash === `#${entry.target.id}`));
+              });
+            },
+            { rootMargin: "-42% 0px -50% 0px", threshold: 0 }
+          );
+          observedSections.forEach((section) => navObserver.observe(section));
+        }
+
+        if (requirement && count) {
+          requirement.addEventListener("input", () => {
+            count.textContent = String(requirement.value.length);
+          });
+        }
+
+        if (form && status) {
+          form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            status.textContent = "咨询通道接入中，请优先通过电话或邮箱联系我们。";
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

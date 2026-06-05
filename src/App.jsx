@@ -1,24 +1,41 @@
+import { useEffect } from 'react';
 import Nav from './components/Nav.jsx';
 import Hero from './sections/Hero.jsx';
 import Company from './sections/Company.jsx';
 import Solution from './sections/Solution.jsx';
 import DeviceDashboard from './sections/DeviceDashboard.jsx';
 import PlatformCases from './sections/PlatformCases.jsx';
-import ExperienceModule from './sections/ExperienceModule.jsx';
-import CooperationContact from './sections/CooperationContact.jsx';
+import TailCasesCooperation from './sections/TailCasesCooperation.jsx';
+import TailPartnersContact from './sections/TailPartnersContact.jsx';
+
+const SHOW_SOLUTION_SECTION = false;
 
 export default function App() {
+  useEffect(() => {
+    const scrollToHash = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      if (!id) return;
+      requestAnimationFrame(() => {
+        document.getElementById(id)?.scrollIntoView({ block: 'start' });
+      });
+    };
+
+    scrollToHash();
+    window.addEventListener('hashchange', scrollToHash);
+    return () => window.removeEventListener('hashchange', scrollToHash);
+  }, []);
+
   return (
     <>
       <Nav />
       <main>
         <Hero />
         <Company />
-        <Solution />
+        {SHOW_SOLUTION_SECTION ? <Solution /> : null}
         <DeviceDashboard />
         <PlatformCases />
-        <ExperienceModule />
-        <CooperationContact />
+        <TailCasesCooperation />
+        <TailPartnersContact />
       </main>
       <footer className="footer">
         <div className="site-shell footer-inner">

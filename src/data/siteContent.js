@@ -1,9 +1,8 @@
 export const navLinks = [
   { href: '#home', label: '首页' },
   { href: '#company', label: '关于我们' },
-  { href: '#solution', label: '解决方案' },
-  { href: '#cases', label: '平台案例' },
-  { href: '#experience', label: '能力体验' },
+  { href: '#platform', label: '解决方案' },
+  { href: '#cases', label: '应用案例' },
   { href: '#cooperation', label: '合作模式' },
 ];
 
@@ -47,46 +46,58 @@ export const solutionPlans = [
     no: '01',
     tag: '采集重建',
     title: '现场采集到三维重建',
-    desc: '覆盖现场采集、三维重建、贴图处理、质量验收与成果交付，先建立高质量数字化基础能力。',
-    tags: ['现场采集', '三维重建', '贴图处理', '质量验收', '成果交付'],
-    image: '/home-required-assets/采集现场图1.png',
+    shortDesc: '现场成果，可验收交付。',
+    desc: '现场成果，可验收交付。',
+    tags: ['现场采集', '三维重建', '贴图处理', '质量验收'],
+    evidence: ['采集', '重建', '质检', '交付'],
+    image: '/home-required-assets/采集管理平台截图.png',
+    sceneImage: '/home-required-assets/采集现场图1.png',
+    supportImage: '/home-required-assets/三维模型截图2.png',
   },
   {
     id: 'asset',
     no: '02',
     tag: '资产治理',
     title: '数据治理与资产化',
-    desc: '围绕标注体系、元数据组织、质检规则、权限管理、数字档案与资产包，让文件成果走向可管理资产。',
-    tags: ['标注体系', '元数据组织', '质检规则', '权限管理', '数字档案'],
+    shortDesc: '多源数据，统一管理。',
+    desc: '多源数据，统一管理。',
+    tags: ['元数据', '权限管理', '数字档案', '资产包'],
+    evidence: ['元数据', '权限', '档案', '资产包'],
     image: '/home-required-assets/文博档案管理平台截图.png',
+    sceneImage: '/home-required-assets/三维模型截图1.png',
+    supportImage: '/home-required-assets/三维模型截图3.png',
   },
   {
     id: 'flow',
     no: '03',
     tag: '应用流通',
     title: '应用与可信流通',
-    desc: '依托山海平台、内容应用、授权出库、定制水印、使用留痕与审计管理，支撑安全复用和公共服务。',
-    tags: ['山海平台', '内容应用', '授权出库', '数字水印', '审计管理'],
+    shortDesc: '面向大众，持续运营。',
+    desc: '面向大众，持续运营。',
+    tags: ['平台应用', '授权出库', '数字水印', '审计留痕'],
+    evidence: ['平台应用', '授权', '水印', '留痕'],
     image: '/home-required-assets/流通运营管理平台截图.png',
+    sceneImage: '/home-required-assets/山海云枢截图.png',
+    supportImage: '/home-required-assets/山海app首页.png',
   },
 ];
 
 export const deviceCards = [
   {
     id: '01',
-    title: '光场轨道采集系统',
+    title: '第一代 · 光场轨道采集系统',
     desc: '多机位同步采集，适用于稳定轨道化作业场景。',
-    image: '/home-assets/device-01.png',
+    image: '/home-assets/device-01-optimized.png',
   },
   {
     id: '02',
-    title: '移动便携采集箱',
+    title: '第二代 · 移动便携采集箱',
     desc: '便携部署，适合现场快速搭建与多场景采集。',
-    image: '/home-assets/device-02.png',
+    image: '/home-assets/device-02-optimized.png',
   },
   {
     id: '03',
-    title: '机械臂采集台',
+    title: '第三代 · 机械臂采集台',
     desc: '机械结构配合工业相机，实现高精度自动化采集。',
     image: '/home-assets/device-03.png',
   },
@@ -101,6 +112,62 @@ export const platformScreens = [
   { image: '/home-required-assets/山海app文物列表页.png', label: '文物列表' },
 ];
 
+export const platformCapabilities = [
+  { no: '01', title: '采集入库', desc: '现场成果进入平台。' },
+  { no: '02', title: '资产治理', desc: '文物档案统一管理。' },
+  { no: '03', title: '应用发布', desc: '内容服务快速上线。' },
+  { no: '04', title: '授权流通', desc: '使用记录全程留痕。' },
+];
+
+export const platformShowcases = [
+  {
+    no: '01',
+    title: '数据生产加工',
+    platform: '采集重建管理平台',
+    desc: '采集、重建、质检，形成可入库的数据资产。',
+    tags: ['采集', '重建', '质检'],
+    image: '/home-assets/platform-showcase-01-production.png',
+  },
+  {
+    no: '02',
+    title: '数据存储管理',
+    platform: '山海云枢 & 数据存储平台',
+    desc: '图像、模型、文件与版本，进入安全存储体系。',
+    tags: ['加密传输', '云端存储', '权限管理'],
+    image: '/home-assets/platform-showcase-02-storage.png',
+  },
+  {
+    no: '03',
+    title: '数字档案管理',
+    platform: '文博档案管理平台',
+    desc: '电子档案、模型预览、标注状态统一管理。',
+    tags: ['电子档案', '模型预览', '加工出库'],
+    image: '/home-assets/platform-showcase-03-archive.png',
+  },
+  {
+    no: '04',
+    title: '数据流通运营',
+    platform: '流通运营管理平台',
+    desc: '水印识别、授权记录、流通轨迹全程留痕。',
+    tags: ['数字水印', '授权记录', '审计留痕'],
+    image: '/home-assets/platform-showcase-04-watermark-flow.png',
+  },
+  {
+    no: '05',
+    title: '公众应用服务',
+    platform: '山海 Web & App',
+    desc: '构建面向公众的数字文博服务入口。',
+    tags: ['文物库', '内容触达', '数字文创'],
+    image: '/home-assets/platform-showcase-05-app.png',
+  },
+];
+
+export const platformEvidenceScreens = [
+  { image: '/home-required-assets/采集管理平台截图.png', label: '采集管理' },
+  { image: '/home-required-assets/文博档案管理平台截图.png', label: '数字档案' },
+  { image: '/home-required-assets/流通运营管理平台截图.png', label: '流通运营' },
+];
+
 export const caseCards = [
   { title: '高精度三维模型', desc: '证明复杂器物的模型重建和材质保留能力。', image: '/home-required-assets/三维模型截图2.png' },
   { title: '辛追夫人晚宴', desc: '证明文化 IP 内容转译和沉浸式传播能力。', image: '/home-required-assets/案例-辛追夫人晚宴宣传图.png' },
@@ -108,6 +175,13 @@ export const caseCards = [
   { title: '昆明市博物馆一码服务', desc: '证明馆端公共服务和移动访问承接能力。', image: '/home-required-assets/案例-昆明市博物馆一馆一码.png' },
   { title: '山海亲子寻宝', desc: '证明公众互动和活动运营能力。', image: '/home-required-assets/案例-山海亲子寻宝3.png' },
   { title: '文创互动', desc: '证明授权衍生和数字内容运营能力。', image: '/home-required-assets/案例-冰箱贴1.png' },
+];
+
+export const featuredCases = [
+  { title: '高精度三维模型', desc: '验证采集精度与细节还原。', image: '/home-required-assets/三维模型截图2.png' },
+  { title: '辛追夫人晚宴', desc: '让数字资产进入内容叙事。', image: '/home-required-assets/案例-辛追夫人晚宴宣传图.png' },
+  { title: '丝绸之路相', desc: '形成专题化公众传播体验。', image: '/home-required-assets/案例-丝绸之路（相）宣传图.png' },
+  { title: '昆明一码服务', desc: '承接馆端服务与用户触达。', image: '/home-required-assets/案例-昆明市博物馆一馆一码.png' },
 ];
 
 export const cooperationSteps = [

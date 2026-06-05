@@ -19,8 +19,8 @@ export default function Hero() {
           </h1>
           <p className="hero-copy">围绕文物数据全生命周期，提供从高质量数字化、数据治理、资产管理，到平台应用与持续运营的一体化能力。</p>
           <div className="hero-actions">
-            <a className="btn dark" href="#solution">了解解决方案</a>
-            <a className="btn light" href="#cases">查看平台案例</a>
+            <a className="btn dark" href="#platform">解决方案</a>
+            <a className="btn light" href="#cases">应用案例</a>
           </div>
         </Reveal>
 

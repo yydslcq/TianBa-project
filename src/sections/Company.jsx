@@ -1,50 +1,87 @@
-import Reveal from '../components/Reveal.jsx';
-import { businessCards, companyPoints } from '../data/siteContent.js';
+import FadeContent from '../components/FadeContent.jsx';
+
+const artifactItems = [
+  { src: '/assets/company-artifacts/artifact-01.png', className: 'a01', alt: '刘贺玉印文物图' },
+  { src: '/assets/company-artifacts/artifact-02.png', className: 'a02', alt: '青金石文物图' },
+  { src: '/assets/company-artifacts/artifact-03.png', className: 'a03', alt: 'T形帛画文物图' },
+  { src: '/assets/company-artifacts/artifact-04.png', className: 'a04', alt: '佛像文物图' },
+  { src: '/assets/company-artifacts/artifact-05.png', className: 'a05', alt: '狻猊文物图' },
+  { src: '/assets/company-artifacts/artifact-06.png', className: 'a06', alt: '猪尊文物图' },
+  { src: '/assets/company-artifacts/artifact-07.png', className: 'a07', alt: '皿方罍文物图' },
+  { src: '/assets/company-artifacts/artifact-08.png', className: 'a08', alt: '竖琴乐俑文物图' },
+  { src: '/assets/company-artifacts/artifact-09.png', className: 'a09', alt: '竖琴乐俑文物图' },
+  { src: '/assets/company-artifacts/artifact-10.png', className: 'a10', alt: '金杯文物图' },
+  { src: '/assets/company-artifacts/artifact-11.png', className: 'a11', alt: '金饰牌文物图' },
+  { src: '/assets/company-artifacts/artifact-12.png', className: 'a12', alt: '铜奔马文物图' },
+  { src: '/assets/company-artifacts/artifact-13.png', className: 'a13', alt: '陶单耳杯文物图' },
+  { src: '/assets/company-artifacts/artifact-14.png', className: 'a14', alt: '青瓷执壶文物图' },
+  { src: '/assets/company-artifacts/artifact-15.png', className: 'a15', alt: '青花矾红荸荠瓶文物图' },
+  { src: '/assets/company-artifacts/artifact-16.png', className: 'a16', alt: '骑马俑文物图' },
+];
+
+const businessItems = [
+  '采集重建',
+  '资产治理',
+  '平台应用',
+  '运营服务',
+];
 
 export default function Company() {
+  const handleCardPointerMove = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    event.currentTarget.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+    event.currentTarget.style.setProperty('--my', `${event.clientY - rect.top}px`);
+  };
+
+  const handleCardPointerLeave = (event) => {
+    event.currentTarget.style.setProperty('--mx', '50%');
+    event.currentTarget.style.setProperty('--my', '20%');
+  };
+
   return (
-    <section className="about about-clean" id="company">
-      <div className="site-shell about-clean-shell">
-        <Reveal className="clean-heading">
-          <span>公司介绍</span>
-          <div className="clean-titlemark">
-            <img src="/assets/company-logo-symbol.png" alt="芒果数智品牌图形" />
-            <h2>湖南芒果数智艺术科技有限责任公司</h2>
-          </div>
-          <p>依托湖南广电体系打造的文化艺术科技企业，面向博物馆、文旅单位与文化科技项目，提供文物数字化、文物数字资产管理、平台运营与数据咨询服务。</p>
-        </Reveal>
+    <section className="about company-immersive" id="company">
+      <div className="company-bg" aria-hidden="true" />
+      <div className="company-veil" aria-hidden="true" />
+      <div className="company-particles" aria-hidden="true" />
 
-        <Reveal className="clean-intro">
-          <div className="clean-abstract-card image-card" aria-hidden="true">
-            <img src="/assets/company-intro-main-transparent.png" alt="" />
-          </div>
-          <div className="clean-points" aria-label="公司核心定位">
-            {companyPoints.map((point) => {
-              const [lead, rest] = point.split('，');
-              return (
-                <p key={point}>
-                  <b>{lead}</b>，{rest}
-                </p>
-              );
-            })}
-          </div>
-        </Reveal>
+      <div className="artifact-cloud" aria-hidden="true">
+        {artifactItems.map((item, index) => (
+          <span
+            className={`artifact-item ${item.className}`}
+            key={item.src}
+            style={{ '--artifact-delay': `-${index * 680}ms` }}
+          >
+            <img src={item.src} alt="" />
+          </span>
+        ))}
+      </div>
 
-        <Reveal as="p" className="clean-statement">主营业务</Reveal>
+      <div className="site-shell company-immersive-shell">
+        <div className="company-stage" aria-label="公司介绍">
+          <div className="company-title-wrap">
+            <h2 className="company-title">
+              文物<span className="company-title-cyan">数字化</span>保护与<span className="company-title-gold">活化利用</span>的<span className="company-title-cyan">领航者</span>
+            </h2>
+          </div>
 
-        <Reveal className="business-grid" aria-label="主营业务">
-          {businessCards.map((card) => (
-            <article key={card.title} tabIndex="0">
-              <figure>
-                <img src={card.image} alt={card.title} />
-              </figure>
-              <div>
-                <b>{card.title}</b>
-                <span>{card.desc}</span>
-              </div>
-            </article>
-          ))}
-        </Reveal>
+          <FadeContent className="company-business-cards" duration={900} delay={540}>
+            {businessItems.map((item, index) => (
+              <article
+                className="company-business-card"
+                key={item}
+                style={{
+                  '--card-delay': `${index * 110}ms`,
+                  '--float-delay': `${index * -900}ms`,
+                }}
+                tabIndex="0"
+                onPointerMove={handleCardPointerMove}
+                onPointerLeave={handleCardPointerLeave}
+              >
+                <h3>{item}</h3>
+              </article>
+            ))}
+          </FadeContent>
+        </div>
       </div>
     </section>
   );
