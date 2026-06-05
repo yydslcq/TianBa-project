@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ReconstructionShowcase from './ReconstructionShowcase.jsx';
+import { assetPath } from '../utils/assetPath.js';
 import '../styles/tail-partners-contact.css';
 
 const PNG_PARTNERS = new Set([4, 9, 14, 17, 23, 33, 36, 39, 44, 46]);
@@ -12,7 +13,7 @@ const CONTACT_STATUS = '咨询通道接入中，请优先通过电话或邮箱�
 
 function getPartnerLogo(index) {
   const stem = String(index).padStart(3, '0');
-  return `/assets/partners-transparent/partner-${stem}.${PNG_PARTNERS.has(index) ? 'png' : 'webp'}?v=logo-ink-20260605`;
+  return assetPath(`/assets/partners-transparent/partner-${stem}.${PNG_PARTNERS.has(index) ? 'png' : 'webp'}?v=logo-ink-20260605`);
 }
 
 function PartnerSequence({ indexes, duplicate = false }) {

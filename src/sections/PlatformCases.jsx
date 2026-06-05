@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Reveal from '../components/Reveal.jsx';
 import { platformShowcases } from '../data/siteContent.js';
+import { assetPath } from '../utils/assetPath.js';
 
 export default function PlatformCases() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -10,7 +11,7 @@ export default function PlatformCases() {
     <section className="platform-cases" id="platform">
       <section className="shanhai-platform" aria-labelledby="platform-title">
         <div className="platform-showcase-bg" aria-hidden="true">
-          <img key={activeShowcase.image} src={activeShowcase.image} alt="" />
+          <img key={activeShowcase.image} src={assetPath(activeShowcase.image)} alt="" />
         </div>
         <div className="platform-showcase-scrim" aria-hidden="true" />
 

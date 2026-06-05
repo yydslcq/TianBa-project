@@ -1,4 +1,5 @@
 import FadeContent from '../components/FadeContent.jsx';
+import { assetPath } from '../utils/assetPath.js';
 
 const artifactItems = [
   { src: '/assets/company-artifacts/artifact-01.png', className: 'a01', alt: '刘贺玉印文物图' },
@@ -51,7 +52,7 @@ export default function Company() {
             key={item.src}
             style={{ '--artifact-delay': `-${index * 680}ms` }}
           >
-            <img src={item.src} alt="" />
+            <img src={assetPath(item.src)} alt="" />
           </span>
         ))}
       </div>

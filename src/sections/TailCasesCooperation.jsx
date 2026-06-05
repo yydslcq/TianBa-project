@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { assetPath } from '../utils/assetPath.js';
 import '../styles/tail-cases-cooperation.css';
 
 const CASES = [
@@ -82,7 +83,7 @@ function CaseMedia({ item }) {
   if (item.splitMedia) {
     return (
       <div className="tail-cases-split-media">
-        <img src={item.splitMedia.poster.src} alt={item.splitMedia.poster.alt} />
+        <img src={assetPath(item.splitMedia.poster.src)} alt={item.splitMedia.poster.alt} />
         <video
           autoPlay
           muted
@@ -92,7 +93,7 @@ function CaseMedia({ item }) {
           data-case-video=""
           aria-label={`${item.title}影像片段`}
         >
-          <source src={item.splitMedia.video} type="video/mp4" />
+          <source src={assetPath(item.splitMedia.video)} type="video/mp4" />
         </video>
       </div>
     );
@@ -106,20 +107,20 @@ function CaseMedia({ item }) {
         loop
         playsInline
         preload="metadata"
-        poster={item.poster}
+        poster={assetPath(item.poster)}
         data-case-video=""
         aria-label={`${item.title}影像片段`}
       >
-        <source src={item.video} type="video/mp4" />
+        <source src={assetPath(item.video)} type="video/mp4" />
       </video>
     );
   }
 
   if (item.images) {
-    return item.images.map((image) => <img key={image.src} src={image.src} alt={image.alt} />);
+    return item.images.map((image) => <img key={image.src} src={assetPath(image.src)} alt={image.alt} />);
   }
 
-  return <img src={item.image} alt={item.alt} />;
+  return <img src={assetPath(item.image)} alt={item.alt} />;
 }
 
 export default function TailCasesCooperation() {

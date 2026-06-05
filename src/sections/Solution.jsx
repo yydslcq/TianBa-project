@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Reveal from '../components/Reveal.jsx';
 import { solutionPlans } from '../data/siteContent.js';
+import { assetPath } from '../utils/assetPath.js';
 
 const AUTO_PLAY_MS = 5000;
 const MANUAL_PAUSE_MS = 10000;
@@ -22,7 +23,7 @@ function PlanCard({ plan, logicalIndex, isActive, onSelect }) {
         <p>{plan.shortDesc}</p>
       </div>
       <figure className="plan-visual">
-        <img className="plan-scene-image" src={plan.sceneImage} alt="" aria-hidden="true" />
+        <img className="plan-scene-image" src={assetPath(plan.sceneImage)} alt="" aria-hidden="true" />
         <div className="plan-visual-wash" />
         <div className="plan-browser-window">
           <div className="plan-window-bar" aria-hidden="true">
@@ -30,11 +31,11 @@ function PlanCard({ plan, logicalIndex, isActive, onSelect }) {
             <span />
             <span />
           </div>
-          <img src={plan.image} alt={plan.title} />
+          <img src={assetPath(plan.image)} alt={plan.title} />
         </div>
         {plan.supportImage ? (
           <div className={`plan-support-window ${plan.id === 'flow' ? 'is-phone' : ''}`} aria-hidden="true">
-            <img src={plan.supportImage} alt="" />
+            <img src={assetPath(plan.supportImage)} alt="" />
           </div>
         ) : null}
       </figure>

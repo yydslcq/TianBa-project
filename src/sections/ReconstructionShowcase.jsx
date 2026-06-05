@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { assetPath } from '../utils/assetPath.js';
 
 const GLB_SRC = '/home-assets/recon-container.glb';
 const MAX_RIPPLES = 16;
@@ -292,10 +293,10 @@ export default function ReconstructionShowcase({ children, variant = '' }) {
     };
 
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('/draco/');
+    dracoLoader.setDecoderPath(assetPath('/draco/'));
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
-    loader.load(GLB_SRC, (gltf) => {
+    loader.load(assetPath(GLB_SRC), (gltf) => {
       if (cancelled) return;
       const model = gltf.scene;
       model.traverse((node) => {

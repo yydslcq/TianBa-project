@@ -1,10 +1,11 @@
 import Reveal from '../components/Reveal.jsx';
 import { deviceCards } from '../data/siteContent.js';
+import { assetPath } from '../utils/assetPath.js';
 
 export default function DeviceDashboard() {
   return (
     <section className="device-dashboard" aria-label="采集设备与现场证据">
-      <video className="device-bg-video" src="/home-assets/equipment-video.mp4" autoPlay muted loop playsInline />
+      <video className="device-bg-video" src={assetPath('/home-assets/equipment-video.mp4')} autoPlay muted loop playsInline />
       <div className="site-shell device-shell">
         <Reveal className="device-heading">
           <h2>芒果数智 · 四代自研智能化采集设备</h2>
@@ -12,7 +13,7 @@ export default function DeviceDashboard() {
         </Reveal>
 
         <Reveal className="device-video-panel">
-          <video id="mainVideo" src="/home-assets/equipment-video.mp4" autoPlay muted loop playsInline />
+          <video id="mainVideo" src={assetPath('/home-assets/equipment-video.mp4')} autoPlay muted loop playsInline />
           <div className="device-video-caption">新一代智能采集一体机</div>
         </Reveal>
 
@@ -23,7 +24,7 @@ export default function DeviceDashboard() {
               className="device-card"
             >
               <div className="device-img">
-                <img src={device.image} alt={device.title} />
+                <img src={assetPath(device.image)} alt={device.title} />
               </div>
               <div className="device-body">
                 <div>

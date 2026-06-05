@@ -1,12 +1,13 @@
 import Reveal from '../components/Reveal.jsx';
 import { heroStats } from '../data/siteContent.js';
+import { assetPath } from '../utils/assetPath.js';
 
 export default function Hero() {
   return (
     <header className="hero" id="home">
       <div className="hero-media" aria-hidden="true">
         <video autoPlay muted loop playsInline preload="auto">
-          <source src="/assets/shanhai-app-logo-loop.mp4" type="video/mp4" />
+          <source src={assetPath('/assets/shanhai-app-logo-loop.mp4')} type="video/mp4" />
         </video>
       </div>
       <div className="site-shell hero-grid">
