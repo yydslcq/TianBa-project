@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>合作模式与文博伙伴</title>
+    <style>
+      :root {
+        --mist-50: #f5f7f7;
+        --mist-100: #eef2f2;
+        --mist-200: #dce3e4;
+        --mist-300: #c6d0d1;
+        --mist-500: #768486;
+        --ink-900: #182023;
+        --ink-700: #3f4b4e;
+        --night-950: #101415;
+        --night-900: #151a1b;
+        --night-line: rgba(231, 237, 237, 0.13);
+        --paper: #fbfcfc;
+        --shell: min(89vw, 1480px);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink-900);
+        background: var(--night-950);
+        font-family:
+          "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      .section-shell {
+        width: var(--shell);
+        margin-inline: auto;
+      }
+
+      .cooperation {
+        position: relative;
+        overflow: hidden;
+        padding: 112px 0 104px;
+        background:
+          radial-gradient(circle at 85% 8%, rgba(213, 224, 225, 0.82), transparent 28%),
+          linear-gradient(135deg, #f7f9f9 0%, #edf2f2 55%, #f4f6f6 100%);
+      }
+
+      .cooperation::before {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+        opacity: 0.45;
+        background-image:
+          linear-gradient(rgba(124, 144, 147, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(124, 144, 147, 0.06) 1px, transparent 1px);
+        background-size: 100% 64px, 64px 100%;
+        mask-image: linear-gradient(90deg, transparent, black 28%, black 82%, transparent);
+      }
+
+      .cooperation-intro {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+        gap: 48px;
+        align-items: end;
+      }
+
+      .cooperation h1,
+      .partners h2 {
+        margin: 0;
+        font-family:
+          "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+        font-weight: 600;
+        letter-spacing: -0.075em;
+      }
+
+      .cooperation h1 {
+        max-width: 740px;
+        color: var(--ink-900);
+        font-size: clamp(40px, 4.9vw, 72px);
+        line-height: 1.1;
+      }
+
+      .cooperation-intro p {
+        max-width: 500px;
+        margin: 0 0 7px;
+        color: var(--ink-700);
+        font-size: 18px;
+        line-height: 1.9;
+      }
+
+      .cooperation-grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: 68px;
+        border-block: 1px solid var(--mist-300);
+      }
+
+      .cooperation-item {
+        min-height: 286px;
+        padding: 33px 28px 30px;
+        border-left: 1px solid var(--mist-300);
+      }
+
+      .cooperation-item:first-child {
+        border-left: 0;
+      }
+
+      .cooperation-item::before {
+        display: block;
+        width: 32px;
+        height: 1px;
+        margin-bottom: 64px;
+        content: "";
+        background: #829597;
+        transform-origin: left center;
+        transition: transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .cooperation-item:hover::before {
+        transform: scaleX(2);
+      }
+
+      .cooperation-item h3 {
+        margin: 0;
+        color: var(--ink-900);
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -0.055em;
+      }
+
+      .cooperation-item p {
+        max-width: 245px;
+        margin: 18px 0 0;
+        color: #586669;
+        font-size: 15px;
+        line-height: 1.9;
+      }
+
+      .partners {
+        position: relative;
+        overflow: hidden;
+        padding: 108px 0 116px;
+        color: #edf2f2;
+        background:
+          radial-gradient(circle at 10% 6%, rgba(96, 117, 119, 0.18), transparent 25%),
+          linear-gradient(155deg, var(--night-900), var(--night-950) 52%);
+      }
+
+      .partners::before {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+        opacity: 0.22;
+        background-image: linear-gradient(
+          112deg,
+          transparent 0%,
+          transparent 50%,
+          rgba(221, 231, 231, 0.09) 50.1%,
+          transparent 50.3%
+        );
+        background-size: 46px 46px;
+      }
+
+      .partners-intro {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.28fr) minmax(320px, 0.72fr);
+        gap: 52px;
+        align-items: end;
+      }
+
+      .partners h2 {
+        max-width: 800px;
+        color: #f1f4f4;
+        font-size: clamp(40px, 4.45vw, 68px);
+        line-height: 1.12;
+      }
+
+      .partners-intro p {
+        max-width: 510px;
+        margin: 0 0 7px;
+        color: rgba(223, 231, 231, 0.69);
+        font-size: 17px;
+        line-height: 1.9;
+      }
+
+      .partners-viewport {
+        position: relative;
+        margin-top: 60px;
+        overflow: hidden;
+        border-block: 1px solid var(--night-line);
+        mask-image: linear-gradient(90deg, transparent, black 7%, black 93%, transparent);
+      }
+
+      .partners-row {
+        overflow: hidden;
+        padding: 20px 0;
+      }
+
+      .partners-row + .partners-row {
+        border-top: 1px solid var(--night-line);
+      }
+
+      .partners-track {
+        display: flex;
+        width: max-content;
+        will-change: transform;
+      }
+
+      .partners-row:first-child .partners-track {
+        animation: marquee-forward 48s linear infinite;
+      }
+
+      .partners-row:last-child .partners-track {
+        margin-left: -92px;
+        animation: marquee-reverse 54s linear infinite;
+      }
+
+      .partners-viewport:hover .partners-track {
+        animation-play-state: paused;
+      }
+
+      .logo-sequence {
+        display: flex;
+        flex: none;
+        gap: 18px;
+        padding-right: 18px;
+      }
+
+      .partner-mark {
+        display: grid;
+        width: 178px;
+        height: 74px;
+        place-items: center;
+        border: 1px solid rgba(229, 235, 235, 0.14);
+        background: rgba(239, 243, 243, 0.92);
+        transition:
+          background-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .partner-mark img {
+        display: block;
+        max-width: 138px;
+        max-height: 44px;
+        object-fit: contain;
+        filter: grayscale(1) saturate(0.18) contrast(0.88);
+        opacity: 0.64;
+        transition:
+          filter 300ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 300ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .partner-mark:hover {
+        background: rgba(255, 255, 255, 0.98);
+        transform: translate3d(0, -3px, 0);
+      }
+
+      .partner-mark:hover img {
+        filter: grayscale(0) saturate(0.92) contrast(1);
+        opacity: 1;
+      }
+
+      @keyframes marquee-forward {
+        from {
+          transform: translate3d(0, 0, 0);
+        }
+        to {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+
+      @keyframes marquee-reverse {
+        from {
+          transform: translate3d(-50%, 0, 0);
+        }
+        to {
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      @media (max-width: 980px) {
+        .cooperation,
+        .partners {
+          padding-block: 82px;
+        }
+
+        .cooperation-intro,
+        .partners-intro {
+          grid-template-columns: 1fr;
+          gap: 22px;
+        }
+
+        .cooperation-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          margin-top: 48px;
+        }
+
+        .cooperation-item {
+          min-height: 230px;
+        }
+
+        .cooperation-item:nth-child(3) {
+          border-left: 0;
+        }
+
+        .cooperation-item:nth-child(n + 3) {
+          border-top: 1px solid var(--mist-300);
+        }
+      }
+
+      @media (max-width: 620px) {
+        :root {
+          --shell: min(89vw, 520px);
+        }
+
+        .cooperation,
+        .partners {
+          padding-block: 66px;
+        }
+
+        .cooperation::before,
+        .partners::before {
+          display: none;
+        }
+
+        .cooperation h1,
+        .partners h2 {
+          font-size: clamp(34px, 10.3vw, 47px);
+          letter-spacing: -0.085em;
+        }
+
+        .cooperation-intro p,
+        .partners-intro p {
+          font-size: 15px;
+          line-height: 1.85;
+        }
+
+        .cooperation-grid {
+          grid-template-columns: 1fr;
+          margin-top: 40px;
+        }
+
+        .cooperation-item,
+        .cooperation-item:nth-child(3) {
+          min-height: auto;
+          padding: 24px 0 26px;
+          border-top: 1px solid var(--mist-300);
+          border-left: 0;
+        }
+
+        .cooperation-item:first-child {
+          border-top: 0;
+        }
+
+        .cooperation-item::before {
+          margin-bottom: 32px;
+        }
+
+        .cooperation-item p {
+          max-width: 92%;
+        }
+
+        .partners-viewport {
+          margin-top: 42px;
+          mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
+        }
+
+        .partners-row {
+          padding-block: 14px;
+        }
+
+        .partners-row:last-child .partners-track {
+          margin-left: -54px;
+        }
+
+        .logo-sequence {
+          gap: 12px;
+          padding-right: 12px;
+        }
+
+        .partner-mark {
+          width: 142px;
+          height: 62px;
+        }
+
+        .partner-mark img {
+          max-width: 112px;
+          max-height: 36px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .partners-viewport {
+          overflow: visible;
+          mask-image: none;
+        }
+
+        .partners-row {
+          overflow: visible;
+        }
+
+        .partners-row:last-child .partners-track,
+        .partners-track {
+          display: block;
+          width: 100%;
+          margin-left: 0;
+          animation: none;
+          transform: none;
+          will-change: auto;
+        }
+
+        .logo-sequence {
+          display: grid;
+          width: 100%;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+          padding: 0;
+        }
+
+        .logo-sequence[aria-hidden="true"] {
+          display: none;
+        }
+
+        .partner-mark {
+          width: 100%;
+        }
+
+        .cooperation-item::before,
+        .partner-mark,
+        .partner-mark img {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="cooperation" aria-labelledby="cooperation-title">
+        <div class="section-shell">
+          <div class="cooperation-intro">
+            <h1 id="cooperation-title">多种合作方式，匹配不同建设需求</h1>
+            <p>可从具体项目切入，也可组合形成完整建设方案。</p>
+          </div>
+
+          <div class="cooperation-grid">
+            <article class="cooperation-item">
+              <h3>馆藏数字化合作</h3>
+              <p>围绕重点馆藏，完成采集重建、质量验收与数据交付。</p>
+            </article>
+            <article class="cooperation-item">
+              <h3>专题策展合作</h3>
+              <p>围绕展览主题，组织数字内容、互动体验与传播应用。</p>
+            </article>
+            <article class="cooperation-item">
+              <h3>平台共建合作</h3>
+              <p>结合馆端需求，建设资产管理、应用发布与服务入口。</p>
+            </article>
+            <article class="cooperation-item">
+              <h3>运营共创合作</h3>
+              <p>围绕内容更新、公众触达与授权使用，持续拓展场景。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="partners" aria-labelledby="partners-title">
+        <div class="section-shell partners-intro">
+          <h2 id="partners-title">与文博伙伴，共建数字文化新场景</h2>
+          <p>与收藏单位、研究机构和文化伙伴持续协作，让数据能力进入真实场景。</p>
+        </div>
+
+        <div class="partners-viewport" aria-label="文博合作伙伴标识墙">
+          <div class="partners-row">
+            <div class="partners-track">
+              <div class="logo-sequence">
+                <div class="partner-mark"><img src="/assets/partners/partner-001.jpg" alt="合作伙伴标识 001" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-002.jpg" alt="合作伙伴标识 002" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-003.jpg" alt="合作伙伴标识 003" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-004.jpg" alt="合作伙伴标识 004" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-005.jpg" alt="合作伙伴标识 005" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-006.jpg" alt="合作伙伴标识 006" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-007.jpg" alt="合作伙伴标识 007" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-008.jpg" alt="合作伙伴标识 008" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-009.jpg" alt="合作伙伴标识 009" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-010.jpg" alt="合作伙伴标识 010" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-011.jpg" alt="合作伙伴标识 011" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-012.jpg" alt="合作伙伴标识 012" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-013.jpg" alt="合作伙伴标识 013" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-014.jpg" alt="合作伙伴标识 014" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-015.jpg" alt="合作伙伴标识 015" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-016.jpg" alt="合作伙伴标识 016" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-017.jpg" alt="合作伙伴标识 017" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-018.jpg" alt="合作伙伴标识 018" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-019.jpg" alt="合作伙伴标识 019" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-020.jpg" alt="合作伙伴标识 020" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-021.jpg" alt="合作伙伴标识 021" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-022.jpg" alt="合作伙伴标识 022" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-023.jpg" alt="合作伙伴标识 023" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-024.jpg" alt="合作伙伴标识 024" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-025.jpg" alt="合作伙伴标识 025" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-026.jpg" alt="合作伙伴标识 026" /></div>
+              </div>
+              <div class="logo-sequence" aria-hidden="true">
+                <div class="partner-mark"><img src="/assets/partners/partner-001.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-002.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-003.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-004.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-005.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-006.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-007.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-008.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-009.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-010.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-011.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-012.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-013.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-014.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-015.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-016.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-017.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-018.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-019.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-020.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-021.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-022.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-023.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-024.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-025.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-026.jpg" alt="" /></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="partners-row">
+            <div class="partners-track">
+              <div class="logo-sequence">
+                <div class="partner-mark"><img src="/assets/partners/partner-027.png" alt="合作伙伴标识 027" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-028.jpg" alt="合作伙伴标识 028" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-029.jpg" alt="合作伙伴标识 029" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-030.jpg" alt="合作伙伴标识 030" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-031.jpg" alt="合作伙伴标识 031" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-032.jpg" alt="合作伙伴标识 032" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-033.png" alt="合作伙伴标识 033" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-034.jpg" alt="合作伙伴标识 034" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-035.jpg" alt="合作伙伴标识 035" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-036.jpg" alt="合作伙伴标识 036" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-037.png" alt="合作伙伴标识 037" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-038.jpg" alt="合作伙伴标识 038" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-039.jpg" alt="合作伙伴标识 039" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-040.jpg" alt="合作伙伴标识 040" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-041.jpg" alt="合作伙伴标识 041" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-042.jpg" alt="合作伙伴标识 042" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-043.jpg" alt="合作伙伴标识 043" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-044.jpg" alt="合作伙伴标识 044" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-045.png" alt="合作伙伴标识 045" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-046.jpg" alt="合作伙伴标识 046" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-047.jpg" alt="合作伙伴标识 047" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-048.jpg" alt="合作伙伴标识 048" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-049.jpg" alt="合作伙伴标识 049" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-050.jpg" alt="合作伙伴标识 050" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-051.jpg" alt="合作伙伴标识 051" /></div>
+              </div>
+              <div class="logo-sequence" aria-hidden="true">
+                <div class="partner-mark"><img src="/assets/partners/partner-027.png" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-028.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-029.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-030.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-031.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-032.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-033.png" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-034.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-035.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-036.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-037.png" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-038.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-039.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-040.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-041.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-042.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-043.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-044.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-045.png" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-046.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-047.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-048.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-049.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-050.jpg" alt="" /></div>
+                <div class="partner-mark"><img src="/assets/partners/partner-051.jpg" alt="" /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

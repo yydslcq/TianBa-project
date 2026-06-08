@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>山海平台区视觉方向稿</title>
+    <style>
+      :root {
+        --page: #050a08;
+        --ink: #f2efe3;
+        --muted: rgba(242, 239, 227, 0.68);
+        --weak: rgba(242, 239, 227, 0.42);
+        --line: rgba(242, 239, 227, 0.14);
+        --glass: rgba(16, 25, 22, 0.72);
+        --glass-strong: rgba(23, 34, 31, 0.86);
+        --jade: #46f1bd;
+        --gold: #d7bd7b;
+        --cyan: #7ddcd0;
+        --deep: #07110f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background: var(--page);
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family:
+          "Noto Sans SC",
+          "PingFang SC",
+          "Microsoft YaHei",
+          system-ui,
+          sans-serif;
+        background:
+          linear-gradient(180deg, rgba(7, 12, 12, 0.96), rgba(3, 7, 6, 0.98)),
+          var(--page);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+        background:
+          linear-gradient(120deg, rgba(70, 241, 189, 0.08), transparent 34%),
+          linear-gradient(250deg, rgba(215, 189, 123, 0.1), transparent 36%),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.03) 0 1px,
+            transparent 1px 128px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.025) 0 1px,
+            transparent 1px 118px
+          );
+        opacity: 0.72;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 24px 24px;
+        mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+        opacity: 0.35;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      .preview-nav {
+        position: sticky;
+        top: 18px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: min(1180px, calc(100% - 48px));
+        margin: 18px auto -92px;
+        padding: 10px 12px 10px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        background: rgba(4, 10, 9, 0.74);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.08),
+          0 24px 70px rgba(0, 0, 0, 0.34);
+        backdrop-filter: blur(18px);
+      }
+
+      .preview-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        color: #03241b;
+        font-weight: 900;
+        background: linear-gradient(145deg, var(--jade), var(--cyan));
+        box-shadow: 0 0 28px rgba(70, 241, 189, 0.28);
+      }
+
+      .preview-brand strong {
+        display: block;
+        font-size: 15px;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+      }
+
+      .preview-brand span {
+        display: block;
+        margin-top: 2px;
+        color: var(--weak);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .preview-switch {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .preview-switch a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 118px;
+        height: 38px;
+        padding: 0 18px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        color: rgba(242, 239, 227, 0.8);
+        font-size: 13px;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.05);
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease,
+          color 180ms ease,
+          background 180ms ease;
+      }
+
+      .preview-switch a:hover {
+        transform: translateY(-1px);
+        border-color: rgba(70, 241, 189, 0.42);
+        color: var(--ink);
+        background: rgba(70, 241, 189, 0.1);
+      }
+
+      .direction {
+        position: relative;
+        min-height: 100dvh;
+        overflow: hidden;
+        padding: 144px 0 92px;
+      }
+
+      .direction + .direction {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto;
+      }
+
+      .direction-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        height: 30px;
+        padding: 0 13px;
+        border: 1px solid rgba(70, 241, 189, 0.26);
+        border-radius: 999px;
+        color: var(--jade);
+        font-family:
+          "SFMono-Regular",
+          "Cascadia Code",
+          "Menlo",
+          monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        background: rgba(70, 241, 189, 0.08);
+      }
+
+      .direction-label::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 18px rgba(215, 189, 123, 0.72);
+      }
+
+      .headline {
+        margin: 22px 0 0;
+        max-width: 860px;
+        font-size: clamp(44px, 5.2vw, 76px);
+        line-height: 1.05;
+        font-weight: 900;
+        letter-spacing: 0;
+      }
+
+      .headline .warm {
+        color: #e6cf93;
+      }
+
+      .lead {
+        max-width: 680px;
+        margin: 22px 0 0;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.9;
+      }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .meta-pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 14px;
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        border-radius: 999px;
+        color: rgba(242, 239, 227, 0.72);
+        font-size: 13px;
+        background: rgba(255, 255, 255, 0.055);
+      }
+
+      .direction-a {
+        background:
+          linear-gradient(180deg, rgba(5, 10, 8, 0.78), rgba(5, 10, 8, 0.96)),
+          radial-gradient(circle at 74% 26%, rgba(70, 241, 189, 0.12), transparent 34%),
+          #07100e;
+      }
+
+      .a-hero {
+        display: grid;
+        grid-template-columns: 0.82fr 1.18fr;
+        gap: 44px;
+        align-items: center;
+        margin-top: 58px;
+      }
+
+      .a-copy {
+        position: relative;
+        z-index: 2;
+      }
+
+      .capability-stack {
+        display: grid;
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .capability-card {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 14px;
+        align-items: start;
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 18px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.035));
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          0 22px 70px rgba(0, 0, 0, 0.22);
+        backdrop-filter: blur(18px);
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease,
+          background 180ms ease;
+      }
+
+      .capability-card:hover {
+        transform: translateX(4px);
+        border-color: rgba(70, 241, 189, 0.32);
+        background: linear-gradient(135deg, rgba(70, 241, 189, 0.12), rgba(255, 255, 255, 0.04));
+      }
+
+      .capability-index {
+        color: var(--gold);
+        font-family:
+          "SFMono-Regular",
+          "Cascadia Code",
+          "Menlo",
+          monospace;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .capability-card h3 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      .capability-card p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      .platform-stage {
+        position: relative;
+        min-height: 610px;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 32px;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+          rgba(10, 17, 16, 0.72);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          0 40px 120px rgba(0, 0, 0, 0.38);
+        backdrop-filter: blur(22px);
+      }
+
+      .screen-main {
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 24px;
+        background: rgba(2, 6, 5, 0.82);
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+      }
+
+      .screen-titlebar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 13px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        color: rgba(242, 239, 227, 0.72);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+      }
+
+      .window-dots {
+        display: flex;
+        gap: 6px;
+      }
+
+      .window-dots i {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.22);
+      }
+
+      .screen-main img {
+        aspect-ratio: 405 / 207;
+        object-fit: cover;
+        image-rendering: auto;
+      }
+
+      .screen-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .mini-screen {
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 18px;
+        background: rgba(0, 0, 0, 0.38);
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .mini-screen:hover {
+        transform: translateY(-4px);
+        border-color: rgba(215, 189, 123, 0.44);
+      }
+
+      .mini-screen img {
+        aspect-ratio: 405 / 207;
+        object-fit: cover;
+      }
+
+      .mini-screen span {
+        display: block;
+        padding: 10px 12px 12px;
+        color: rgba(242, 239, 227, 0.76);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .phone-float {
+        position: absolute;
+        right: -18px;
+        bottom: 26px;
+        width: 156px;
+        padding: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 26px;
+        background: rgba(7, 12, 11, 0.78);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          0 28px 80px rgba(0, 0, 0, 0.42);
+        backdrop-filter: blur(18px);
+      }
+
+      .phone-float img {
+        border-radius: 20px;
+        aspect-ratio: 342 / 743;
+        object-fit: cover;
+      }
+
+      .phone-float span {
+        display: block;
+        padding: 10px 6px 4px;
+        color: var(--weak);
+        font-size: 11px;
+        text-align: center;
+      }
+
+      .cases-ribbon {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr 1fr 0.72fr;
+        gap: 14px;
+        margin-top: 46px;
+      }
+
+      .case-tile {
+        position: relative;
+        overflow: hidden;
+        min-height: 190px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 22px;
+        background: var(--glass);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.08),
+          0 20px 70px rgba(0, 0, 0, 0.24);
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .case-tile:hover {
+        transform: translateY(-5px);
+        border-color: rgba(70, 241, 189, 0.32);
+      }
+
+      .case-tile img {
+        height: 152px;
+        object-fit: cover;
+        opacity: 0.86;
+      }
+
+      .case-tile.compact img {
+        object-position: top;
+      }
+
+      .case-tile div {
+        padding: 13px 16px 16px;
+      }
+
+      .case-tile h3 {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.35;
+      }
+
+      .case-tile p {
+        margin: 7px 0 0;
+        color: var(--weak);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .direction-b {
+        background:
+          linear-gradient(180deg, #07100d, #030706),
+          #030706;
+      }
+
+      .b-hero {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 0.9fr;
+        gap: 58px;
+        align-items: end;
+        margin-top: 54px;
+      }
+
+      .b-hero::before {
+        content: "";
+        position: absolute;
+        inset: 28px -80px auto 46%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(215, 189, 123, 0.55), transparent);
+      }
+
+      .narrative-block {
+        padding: 36px 0 0;
+      }
+
+      .b-architecture {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-content: start;
+        gap: 14px;
+        min-height: 640px;
+        padding: 84px 28px 118px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 34px;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.02)),
+          rgba(9, 17, 15, 0.72);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.09),
+          0 36px 110px rgba(0, 0, 0, 0.36);
+        backdrop-filter: blur(18px);
+      }
+
+      .flow-map {
+        position: absolute;
+        inset: 72px 44px 110px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 28px;
+        background:
+          linear-gradient(135deg, rgba(70, 241, 189, 0.08), transparent 42%),
+          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 72px),
+          repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 58px);
+        opacity: 0.72;
+      }
+
+      .flow-line {
+        position: absolute;
+        left: 68px;
+        right: 68px;
+        top: 50%;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(70, 241, 189, 0.12), rgba(215, 189, 123, 0.86), rgba(70, 241, 189, 0.18));
+      }
+
+      .flow-step {
+        position: relative;
+        z-index: 1;
+        min-height: 160px;
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        border-radius: 20px;
+        background: rgba(8, 14, 13, 0.76);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.08),
+          0 24px 72px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(18px);
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease;
+      }
+
+      .flow-step:hover {
+        transform: translateY(-5px);
+        border-color: rgba(70, 241, 189, 0.34);
+      }
+
+      .flow-step:nth-of-type(1) {
+        left: auto;
+        top: auto;
+      }
+
+      .flow-step:nth-of-type(2) {
+        right: auto;
+        top: auto;
+        margin-top: 84px;
+      }
+
+      .flow-step:nth-of-type(3) {
+        left: auto;
+        bottom: auto;
+        margin-top: -32px;
+      }
+
+      .flow-step:nth-of-type(4) {
+        right: auto;
+        bottom: auto;
+        margin-top: 54px;
+      }
+
+      .flow-step small {
+        display: block;
+        color: var(--gold);
+        font-family:
+          "SFMono-Regular",
+          "Cascadia Code",
+          "Menlo",
+          monospace;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+      }
+
+      .flow-step h3 {
+        margin: 10px 0 0;
+        font-size: 19px;
+        line-height: 1.3;
+      }
+
+      .flow-step p {
+        margin: 9px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.62;
+      }
+
+      .terminal-panel {
+        position: absolute;
+        left: 32px;
+        right: 32px;
+        bottom: 26px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.11);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .terminal-panel span {
+        min-height: 70px;
+        padding: 14px;
+        color: rgba(242, 239, 227, 0.72);
+        font-size: 12px;
+        line-height: 1.5;
+        background: rgba(2, 7, 6, 0.76);
+      }
+
+      .terminal-panel b {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--jade);
+        font-size: 15px;
+      }
+
+      .b-case-index {
+        display: grid;
+        grid-template-columns: 0.72fr 1.28fr;
+        gap: 34px;
+        align-items: stretch;
+        margin-top: 56px;
+        padding-top: 42px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .case-copy {
+        align-self: center;
+      }
+
+      .case-copy h2 {
+        margin: 14px 0 0;
+        font-size: clamp(32px, 3vw, 48px);
+        line-height: 1.12;
+        letter-spacing: 0;
+      }
+
+      .case-copy p {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      .text-cases {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .text-case {
+        min-height: 150px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.11);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.045);
+        transition:
+          transform 180ms ease,
+          border-color 180ms ease,
+          background 180ms ease;
+      }
+
+      .text-case:hover {
+        transform: translateY(-4px);
+        border-color: rgba(215, 189, 123, 0.42);
+        background: rgba(215, 189, 123, 0.08);
+      }
+
+      .text-case small {
+        color: var(--gold);
+        font-family:
+          "SFMono-Regular",
+          "Cascadia Code",
+          "Menlo",
+          monospace;
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .text-case h3 {
+        margin: 14px 0 0;
+        font-size: 20px;
+        line-height: 1.35;
+      }
+
+      .text-case p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      @media (max-width: 1080px) {
+        .a-hero,
+        .b-hero,
+        .b-case-index {
+          grid-template-columns: 1fr;
+        }
+
+        .platform-stage,
+        .b-architecture {
+          min-height: auto;
+        }
+
+        .phone-float {
+          right: 18px;
+          width: 132px;
+        }
+
+        .cases-ribbon {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .b-architecture {
+          padding-bottom: 124px;
+        }
+
+        .flow-map,
+        .flow-line {
+          display: none;
+        }
+
+        .flow-step {
+          position: relative;
+          inset: auto !important;
+          width: auto;
+          margin-bottom: 12px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .preview-nav {
+          position: relative;
+          top: auto;
+          width: calc(100% - 24px);
+          margin: 12px auto -86px;
+          border-radius: 24px;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .preview-switch {
+          width: 100%;
+        }
+
+        .preview-switch a {
+          flex: 1;
+          min-width: 0;
+        }
+
+        .direction {
+          padding-top: 132px;
+        }
+
+        .shell {
+          width: min(100% - 28px, 1180px);
+        }
+
+        .headline {
+          font-size: 38px;
+        }
+
+        .screen-grid,
+        .cases-ribbon,
+        .text-cases,
+        .terminal-panel {
+          grid-template-columns: 1fr;
+        }
+
+        .phone-float {
+          position: relative;
+          right: auto;
+          bottom: auto;
+          width: 150px;
+          margin: 16px auto 0;
+        }
+
+        .terminal-panel {
+          position: relative;
+          left: auto;
+          right: auto;
+          bottom: auto;
+          margin-top: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="preview-nav" aria-label="视觉方向切换">
+      <a class="preview-brand" href="#direction-a">
+        <span class="brand-mark">山</span>
+        <span>
+          <strong>山海平台区视觉方向稿</strong>
+          <span>Temporary visual preview</span>
+        </span>
+      </a>
+      <div class="preview-switch">
+        <a href="#direction-a">方案 A</a>
+        <a href="#direction-b">方案 B</a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="direction direction-a" id="direction-a" aria-labelledby="direction-a-title">
+        <div class="shell">
+          <span class="direction-label">Direction A / Screenshot-led</span>
+          <div class="a-hero">
+            <div class="a-copy">
+              <h1 class="headline" id="direction-a-title">
+                山海平台，把采集成果接入<span class="warm">可管理、可应用、可流通</span>的工作台
+              </h1>
+              <p class="lead">
+                方向 A 保留平台截图作为可信证据，但不把低清截图强行拉满。平台界面以玻璃屏幕矩阵呈现，手机 App 只作为小浮层，案例入口用少量高识别度素材承接下方内容。
+              </p>
+              <div class="meta-row" aria-label="图像使用原则">
+                <span class="meta-pill">截图适度放大</span>
+                <span class="meta-pill">App 小浮层</span>
+                <span class="meta-pill">案例图少而稳</span>
+              </div>
+
+              <div class="capability-stack" aria-label="平台能力">
+                <article class="capability-card">
+                  <span class="capability-index">01</span>
+                  <div>
+                    <h3>采集成果入库</h3>
+                    <p>将现场采集结果、设备记录与模型资产统一归档，形成后续治理的起点。</p>
+                  </div>
+                </article>
+                <article class="capability-card">
+                  <span class="capability-index">02</span>
+                  <div>
+                    <h3>数字档案治理</h3>
+                    <p>围绕文物身份、图像、模型、授权与审计信息建立结构化资产台账。</p>
+                  </div>
+                </article>
+                <article class="capability-card">
+                  <span class="capability-index">03</span>
+                  <div>
+                    <h3>应用发布运营</h3>
+                    <p>面向展览、导览、互动、文创与公共服务，把资源转化为可上线的应用。</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="platform-stage" aria-label="平台截图主视觉">
+              <article class="screen-main">
+                <div class="screen-titlebar">
+                  <span>SHANHAI PLATFORM / COLLECTION MANAGEMENT</span>
+                  <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                </div>
+                <img src="/home-required-assets/采集管理平台截图.png" alt="采集管理平台截图" />
+              </article>
+              <div class="screen-grid">
+                <article class="mini-screen">
+                  <img src="/home-required-assets/文博档案管理平台截图.png" alt="文博档案管理平台截图" />
+                  <span>数字档案管理</span>
+                </article>
+                <article class="mini-screen">
+                  <img src="/home-required-assets/流通运营管理平台截图.png" alt="流通运营管理平台截图" />
+                  <span>流通运营管理</span>
+                </article>
+                <article class="mini-screen">
+                  <img src="/home-required-assets/山海云枢截图.png" alt="山海云枢平台截图" />
+                  <span>山海云枢</span>
+                </article>
+              </div>
+              <aside class="phone-float" aria-label="山海 App 小浮层">
+                <img src="/home-required-assets/山海app首页.png" alt="山海 App 首页截图" />
+                <span>Mobile companion</span>
+              </aside>
+            </div>
+          </div>
+
+          <div class="cases-ribbon" aria-label="案例入口">
+            <article class="case-tile">
+              <img src="/home-required-assets/三维模型截图2.png" alt="高精度三维模型案例图" />
+              <div>
+                <h3>高精度三维模型</h3>
+                <p>以真实模型证明采集链路的精度和细节还原。</p>
+              </div>
+            </article>
+            <article class="case-tile">
+              <img src="/home-required-assets/案例-辛追夫人晚宴宣传图.png" alt="辛追夫人晚宴案例图" />
+              <div>
+                <h3>辛追夫人晚宴</h3>
+                <p>从数字资产到沉浸叙事的内容转译。</p>
+              </div>
+            </article>
+            <article class="case-tile">
+              <img src="/home-required-assets/案例-丝绸之路（相）宣传图.png" alt="丝绸之路相案例图" />
+              <div>
+                <h3>丝绸之路相</h3>
+                <p>让文物资源进入可传播、可运营的视觉场景。</p>
+              </div>
+            </article>
+            <article class="case-tile compact">
+              <img src="/home-required-assets/案例-昆明市博物馆一馆一码.png" alt="昆明市博物馆一码服务案例图" />
+              <div>
+                <h3>一馆一码服务</h3>
+                <p>公共服务入口与馆端运营能力衔接。</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="direction direction-b" id="direction-b" aria-labelledby="direction-b-title">
+        <div class="shell">
+          <span class="direction-label">Direction B / Narrative-led</span>
+          <div class="b-hero">
+            <div class="narrative-block">
+              <h1 class="headline" id="direction-b-title">
+                少用图，也能把山海讲成<span class="warm">平台能力的连续现场</span>
+              </h1>
+              <p class="lead">
+                方向 B 不依赖截图清晰度，用暗色纹理、能力路径、玻璃信息卡与文字型案例索引建立“伏羲式”的沉浸感。它更稳，也更适合后续正式页统一风格。
+              </p>
+              <div class="meta-row" aria-label="图像使用原则">
+                <span class="meta-pill">弱化素材堆砌</span>
+                <span class="meta-pill">能力路径优先</span>
+                <span class="meta-pill">案例文字索引</span>
+              </div>
+            </div>
+
+            <div class="b-architecture" aria-label="山海平台能力路径">
+              <div class="flow-map" aria-hidden="true"></div>
+              <div class="flow-line" aria-hidden="true"></div>
+              <article class="flow-step">
+                <small>01 / INPUT</small>
+                <h3>采集成果进入平台</h3>
+                <p>设备现场产生的图像、模型、元数据进入统一工作台。</p>
+              </article>
+              <article class="flow-step">
+                <small>02 / GOVERN</small>
+                <h3>资产治理形成档案</h3>
+                <p>围绕文物、项目、授权与审计建立可信资产结构。</p>
+              </article>
+              <article class="flow-step">
+                <small>03 / OPERATE</small>
+                <h3>应用发布持续运营</h3>
+                <p>面向展览、互动、导览、文创与公共服务进行上线。</p>
+              </article>
+              <article class="flow-step">
+                <small>04 / CIRCULATE</small>
+                <h3>授权流通全程留痕</h3>
+                <p>让数字资产从内部管理走向合规流通和价值转化。</p>
+              </article>
+
+              <div class="terminal-panel" aria-label="平台底层能力">
+                <span><b>23,846</b>数字资产条目</span>
+                <span><b>4</b>端协同入口</span>
+                <span><b>100%</b>授权记录留痕</span>
+                <span><b>24h</b>运营状态监测</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="b-case-index" aria-label="文字型案例入口">
+            <div class="case-copy">
+              <span class="direction-label">Case Entrance</span>
+              <h2>案例不用急着铺图，先让每个入口说明平台价值</h2>
+              <p>
+                如果正式素材不够统一，案例区可以先以文字索引建立秩序，再在被确认适合的项目里加入稳定图片，避免页面看起来像素材拼贴。
+              </p>
+            </div>
+            <div class="text-cases">
+              <article class="text-case">
+                <small>MODEL</small>
+                <h3>高精度三维模型</h3>
+                <p>证明采集精度、模型管理与后续展示能力。</p>
+              </article>
+              <article class="text-case">
+                <small>CONTENT</small>
+                <h3>辛追夫人晚宴</h3>
+                <p>把文物数字资产转译为可传播的内容叙事。</p>
+              </article>
+              <article class="text-case">
+                <small>EXHIBITION</small>
+                <h3>丝绸之路相</h3>
+                <p>面向展陈与公众传播，形成主题化数字体验。</p>
+              </article>
+              <article class="text-case">
+                <small>SERVICE</small>
+                <h3>昆明一码服务</h3>
+                <p>以馆端服务入口承接运营、导览与用户触达。</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

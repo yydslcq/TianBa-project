@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>联系咨询</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #06101a;
+        --bg-deep: #03090f;
+        --panel: rgba(10, 25, 40, 0.76);
+        --panel-line: rgba(134, 179, 213, 0.16);
+        --line: rgba(134, 179, 213, 0.2);
+        --text: #edf5fa;
+        --muted: #a7b9c6;
+        --soft: #7f96a7;
+        --accent: #86b8d5;
+        --accent-strong: #acd3e6;
+        --field: rgba(2, 11, 19, 0.56);
+        --field-focus: rgba(5, 18, 30, 0.88);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-width: 320px;
+        background: var(--bg-deep);
+      }
+
+      body {
+        min-height: 100dvh;
+        margin: 0;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 15% 15%, rgba(30, 77, 107, 0.22), transparent 34rem),
+          radial-gradient(circle at 92% 88%, rgba(18, 55, 82, 0.16), transparent 31rem),
+          linear-gradient(135deg, var(--bg-deep), var(--bg) 52%, #071421);
+        font-family: "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+        opacity: 0.46;
+        background-image:
+          linear-gradient(rgba(146, 192, 220, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(146, 192, 220, 0.025) 1px, transparent 1px);
+        background-size: 56px 56px;
+        mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+      }
+
+      .contact-section {
+        position: relative;
+        display: grid;
+        min-height: 100dvh;
+        place-items: center;
+        padding: 88px 40px;
+      }
+
+      .contact-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+        gap: 72px;
+        width: min(100%, 1240px);
+        align-items: center;
+      }
+
+      .intro {
+        padding-bottom: 4px;
+      }
+
+      h1 {
+        max-width: 9em;
+        margin: 0;
+        color: var(--text);
+        font-family: "Songti SC", "Noto Serif SC", "Source Han Serif SC", serif;
+        font-size: clamp(42px, 4.8vw, 68px);
+        font-weight: 600;
+        letter-spacing: -0.075em;
+        line-height: 1.18;
+      }
+
+      .description {
+        max-width: 31em;
+        margin: 28px 0 0;
+        color: var(--muted);
+        font-size: 16px;
+        letter-spacing: 0.035em;
+        line-height: 1.9;
+      }
+
+      .contact-details {
+        display: grid;
+        gap: 0;
+        margin: 52px 0 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .contact-details p {
+        display: grid;
+        grid-template-columns: 4.75em minmax(0, 1fr);
+        gap: 16px;
+        margin: 0;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .contact-details span {
+        color: var(--soft);
+      }
+
+      .contact-details a {
+        width: fit-content;
+        color: var(--text);
+        text-decoration: none;
+        transition: color 180ms ease;
+      }
+
+      .contact-details a:hover,
+      .contact-details a:focus-visible {
+        color: var(--accent-strong);
+      }
+
+      .form-panel {
+        padding: 38px 40px 36px;
+        border: 1px solid var(--panel-line);
+        border-radius: 18px;
+        background: var(--panel);
+        box-shadow: inset 0 1px 0 rgba(218, 240, 251, 0.04);
+      }
+
+      form {
+        display: grid;
+        gap: 24px;
+      }
+
+      .field {
+        display: grid;
+        gap: 9px;
+      }
+
+      .field label {
+        color: var(--muted);
+        font-size: 14px;
+        letter-spacing: 0.08em;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid rgba(134, 179, 213, 0.19);
+        border-radius: 9px;
+        outline: none;
+        color: var(--text);
+        background: var(--field);
+        font: inherit;
+        font-size: 16px;
+        line-height: 1.6;
+        transition:
+          border-color 180ms ease,
+          background-color 180ms ease;
+      }
+
+      input {
+        height: 52px;
+        padding: 0 15px;
+      }
+
+      textarea {
+        min-height: 150px;
+        padding: 13px 15px;
+        resize: vertical;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: #708695;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: rgba(134, 184, 213, 0.72);
+        background: var(--field-focus);
+      }
+
+      .textarea-meta {
+        display: flex;
+        justify-content: flex-end;
+        color: var(--soft);
+        font-size: 12px;
+        letter-spacing: 0.06em;
+      }
+
+      .actions {
+        display: grid;
+        gap: 16px;
+        padding-top: 4px;
+      }
+
+      button {
+        min-height: 52px;
+        border: 1px solid rgba(172, 211, 230, 0.48);
+        border-radius: 8px;
+        color: #eaf7fc;
+        background: rgba(75, 128, 159, 0.46);
+        cursor: pointer;
+        font: inherit;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        transition:
+          background-color 180ms ease,
+          border-color 180ms ease,
+          transform 180ms ease;
+      }
+
+      button:hover,
+      button:focus-visible {
+        border-color: rgba(172, 211, 230, 0.76);
+        background: rgba(82, 142, 176, 0.58);
+      }
+
+      button:active {
+        transform: translateY(1px);
+      }
+
+      .form-status {
+        min-height: 1.65em;
+        margin: 0;
+        color: var(--accent-strong);
+        font-size: 14px;
+        line-height: 1.65;
+      }
+
+      @media (max-width: 860px) {
+        .contact-section {
+          display: block;
+          min-height: auto;
+          padding: 64px 20px 48px;
+        }
+
+        .contact-layout {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 42px;
+          width: 100%;
+        }
+
+        h1 {
+          max-width: 8.2em;
+          font-size: clamp(38px, 11vw, 54px);
+        }
+
+        .description {
+          margin-top: 21px;
+        }
+
+        .contact-details {
+          margin-top: 36px;
+        }
+
+        .form-panel {
+          padding: 26px 20px 24px;
+          border-radius: 14px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="contact-section">
+      <div class="contact-layout">
+        <section class="intro" aria-labelledby="contact-title">
+          <h1 id="contact-title">与我们共建数字文博新场景</h1>
+          <p class="description">欢迎从馆藏数字化、专题内容或平台建设中的一个具体需求开始。</p>
+
+          <div class="contact-details" aria-label="联系信息">
+            <p><span>联系人</span><strong>刘春前 / 产品经理</strong></p>
+            <p><span>手机</span><a href="tel:19911531345">19911531345</a></p>
+            <p><span>邮箱</span><a href="mailto:liuchunqian@shuziwenbo.cn">liuchunqian@shuziwenbo.cn</a></p>
+          </div>
+        </section>
+
+        <section class="form-panel" aria-label="咨询表单">
+          <form id="consult-form">
+            <div class="field">
+              <label for="name">姓名</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+            </div>
+
+            <div class="field">
+              <label for="phone">电话</label>
+              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required />
+            </div>
+
+            <div class="field">
+              <label for="requirement">需求简述</label>
+              <textarea id="requirement" name="requirement" maxlength="200" required></textarea>
+              <div class="textarea-meta" aria-hidden="true"><span id="count">0</span>/200</div>
+            </div>
+
+            <div class="actions">
+              <button type="submit">提交咨询</button>
+              <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const form = document.querySelector("#consult-form");
+      const requirement = document.querySelector("#requirement");
+      const count = document.querySelector("#count");
+      const status = document.querySelector("#form-status");
+
+      requirement.addEventListener("input", () => {
+        count.textContent = String(requirement.value.length);
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        status.textContent = "咨询通道接入中，请优先通过电话或邮箱联系我们。";
+      });
+    </script>
+  </body>
+</html>
