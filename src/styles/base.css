@@ -214,7 +214,7 @@ button { cursor: pointer; }
   pointer-events: none;
 }
 .company-bg {
-  background: url("https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618437684232192.png") center / cover no-repeat;
+  background: url("/assets/company-cold-bg.png") center / cover no-repeat;
   opacity: .96;
   transform: scale(1.012);
 }
@@ -953,7 +953,7 @@ button { cursor: pointer; }
   background:
     linear-gradient(90deg, rgba(1,4,5,.66) 0%, rgba(1,4,5,.34) 38%, rgba(1,4,5,.28) 62%, rgba(1,4,5,.64) 100%),
     linear-gradient(180deg, rgba(1,4,5,.68) 0%, rgba(1,4,5,.26) 38%, rgba(1,4,5,.56) 100%),
-    url("https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618439287414784.png") 58% center / cover no-repeat,
+    url("/assets/shanhai-gold-mist-bg.png") 58% center / cover no-repeat,
     #020504;
 }
 .reconstruction-showcase--contact::before {

@@ -8,8 +8,8 @@ const CASES = [
     type: '专题传播',
     title: '因为长江',
     description: '沿江文物与城市记忆被重新编织，成为可抵达、可分享的文化叙事。',
-    video: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618416289087488.mp4',
-    poster: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618423256784896.png',
+    video: '/assets/cases/yangtze.mp4',
+    poster: '/assets/cases/yangtze.png',
   },
   {
     slug: 'xinchui',
@@ -18,10 +18,10 @@ const CASES = [
     description: '从器物、饮食与礼制出发，让汉代生活在一场沉浸式晚宴中复现。',
     splitMedia: {
       poster: {
-        src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618414276780032.png',
+        src: '/assets/cases/xinchui-poster.png',
         alt: '辛追夫人晚宴 VR 展宣传海报',
       },
-      video: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618414436163584.mp4',
+      video: '/assets/cases/xinchui-scene.mp4',
     },
   },
   {
@@ -29,7 +29,7 @@ const CASES = [
     type: '公共服务',
     title: '一馆一码',
     description: '以统一入口连接城市文化资源，让在地发现自然进入日常路径。',
-    image: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618469821947904.png',
+    image: '/home-required-assets/案例-海南省博物馆一馆一码2.png',
     alt: '一馆一码应用画面',
   },
   {
@@ -37,7 +37,7 @@ const CASES = [
     type: '互动运营',
     title: '山海亲子寻宝',
     description: '把神话线索放进亲子旅程，用探索任务带孩子读懂山海世界。',
-    image: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618474339213312.png',
+    image: '/home-required-assets/案例-山海亲子寻宝.png',
     alt: '山海亲子寻宝体验画面',
   },
   {
@@ -45,8 +45,8 @@ const CASES = [
     type: '动态影像',
     title: '丝绸之路——相',
     description: '以流动影像串联跨地域遗产，让文明交流从历史材料成为当代感知。',
-    video: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618412166086656.mp4',
-    poster: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618411508539392.png',
+    video: '/assets/cases/silk-road.mp4',
+    poster: '/assets/cases/silk-road-poster.png',
   },
   {
     slug: 'print',
@@ -54,8 +54,8 @@ const CASES = [
     title: '文创打印',
     description: '开放纹样与馆藏图像的再创作路径，让文化资产成为可带走的日常物件。',
     images: [
-      { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618407774650368.png', alt: '文创打印成品之一' },
-      { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618408483487744.png', alt: '文创打印成品之二' },
+      { src: '/assets/cases/print-01.png', alt: '文创打印成品之一' },
+      { src: '/assets/cases/print-03.png', alt: '文创打印成品之二' },
     ],
   },
 ];
@@ -83,7 +83,7 @@ function CaseMedia({ item }) {
   if (item.splitMedia) {
     return (
       <div className="tail-cases-split-media">
-        <img src={assetPath(item.splitMedia.poster.src)} alt={item.splitMedia.poster.alt} loading="lazy" decoding="async" />
+        <img src={assetPath(item.splitMedia.poster.src)} alt={item.splitMedia.poster.alt} />
         <video
           autoPlay
           muted
@@ -117,10 +117,10 @@ function CaseMedia({ item }) {
   }
 
   if (item.images) {
-    return item.images.map((image) => <img key={image.src} src={assetPath(image.src)} alt={image.alt} loading="lazy" decoding="async" />);
+    return item.images.map((image) => <img key={image.src} src={assetPath(image.src)} alt={image.alt} />);
   }
 
-  return <img src={assetPath(item.image)} alt={item.alt} loading="lazy" decoding="async" />;
+  return <img src={assetPath(item.image)} alt={item.alt} />;
 }
 
 export default function TailCasesCooperation() {
