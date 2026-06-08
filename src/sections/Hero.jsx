@@ -7,7 +7,7 @@ export default function Hero() {
     <header className="hero" id="home">
       <div className="hero-media" aria-hidden="true">
         <video autoPlay muted loop playsInline preload="auto">
-          <source src={assetPath('/assets/shanhai-app-logo-loop.mp4')} type="video/mp4" />
+          <source src={assetPath('https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618438703448064.mp4')} type="video/mp4" />
         </video>
       </div>
       <div className="site-shell hero-grid">

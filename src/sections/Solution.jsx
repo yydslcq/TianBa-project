@@ -23,7 +23,7 @@ function PlanCard({ plan, logicalIndex, isActive, onSelect }) {
         <p>{plan.shortDesc}</p>
       </div>
       <figure className="plan-visual">
-        <img className="plan-scene-image" src={assetPath(plan.sceneImage)} alt="" aria-hidden="true" />
+        <img className="plan-scene-image" src={assetPath(plan.sceneImage)} alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <div className="plan-visual-wash" />
         <div className="plan-browser-window">
           <div className="plan-window-bar" aria-hidden="true">
@@ -31,11 +31,11 @@ function PlanCard({ plan, logicalIndex, isActive, onSelect }) {
             <span />
             <span />
           </div>
-          <img src={assetPath(plan.image)} alt={plan.title} />
+          <img src={assetPath(plan.image)} alt={plan.title} loading="lazy" decoding="async" />
         </div>
         {plan.supportImage ? (
           <div className={`plan-support-window ${plan.id === 'flow' ? 'is-phone' : ''}`} aria-hidden="true">
-            <img src={assetPath(plan.supportImage)} alt="" />
+            <img src={assetPath(plan.supportImage)} alt="" loading="lazy" decoding="async" />
           </div>
         ) : null}
       </figure>

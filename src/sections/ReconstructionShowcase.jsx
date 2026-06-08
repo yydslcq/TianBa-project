@@ -4,7 +4,8 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { assetPath } from '../utils/assetPath.js';
 
-const GLB_SRC = '/home-assets/recon-container.glb';
+const GLB_SRC = 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618504604352512.glb';
+const DRACO_DECODER_SRC = 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618541389357056.js';
 const MAX_RIPPLES = 16;
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
@@ -293,7 +294,15 @@ export default function ReconstructionShowcase({ children, variant = '' }) {
     };
 
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath(assetPath('/draco/'));
+    dracoLoader.setDecoderConfig({ type: 'js' });
+    dracoLoader._loadLibrary = (url, responseType) => {
+      if (url !== 'draco_decoder.js') return DRACOLoader.prototype._loadLibrary.call(dracoLoader, url, responseType);
+      const decoderLoader = new THREE.FileLoader(dracoLoader.manager);
+      decoderLoader.setResponseType(responseType);
+      return new Promise((resolve, reject) => {
+        decoderLoader.load(DRACO_DECODER_SRC, resolve, undefined, reject);
+      });
+    };
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
     loader.load(assetPath(GLB_SRC), (gltf) => {
@@ -319,7 +328,7 @@ export default function ReconstructionShowcase({ children, variant = '' }) {
       model.scale.setScalar(scale);
       model.position.y -= 0.05;
       modelRoot.add(model);
-    });
+    }, undefined, () => {});
 
     const animate = (time = 0) => {
       if (cancelled || !sceneTarget) return;

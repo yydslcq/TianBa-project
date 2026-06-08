@@ -2,22 +2,22 @@ import FadeContent from '../components/FadeContent.jsx';
 import { assetPath } from '../utils/assetPath.js';
 
 const artifactItems = [
-  { src: '/assets/company-artifacts/artifact-01.png', className: 'a01', alt: '刘贺玉印文物图' },
-  { src: '/assets/company-artifacts/artifact-02.png', className: 'a02', alt: '青金石文物图' },
-  { src: '/assets/company-artifacts/artifact-03.png', className: 'a03', alt: 'T形帛画文物图' },
-  { src: '/assets/company-artifacts/artifact-04.png', className: 'a04', alt: '佛像文物图' },
-  { src: '/assets/company-artifacts/artifact-05.png', className: 'a05', alt: '狻猊文物图' },
-  { src: '/assets/company-artifacts/artifact-06.png', className: 'a06', alt: '猪尊文物图' },
-  { src: '/assets/company-artifacts/artifact-07.png', className: 'a07', alt: '皿方罍文物图' },
-  { src: '/assets/company-artifacts/artifact-08.png', className: 'a08', alt: '竖琴乐俑文物图' },
-  { src: '/assets/company-artifacts/artifact-09.png', className: 'a09', alt: '竖琴乐俑文物图' },
-  { src: '/assets/company-artifacts/artifact-10.png', className: 'a10', alt: '金杯文物图' },
-  { src: '/assets/company-artifacts/artifact-11.png', className: 'a11', alt: '金饰牌文物图' },
-  { src: '/assets/company-artifacts/artifact-12.png', className: 'a12', alt: '铜奔马文物图' },
-  { src: '/assets/company-artifacts/artifact-13.png', className: 'a13', alt: '陶单耳杯文物图' },
-  { src: '/assets/company-artifacts/artifact-14.png', className: 'a14', alt: '青瓷执壶文物图' },
-  { src: '/assets/company-artifacts/artifact-15.png', className: 'a15', alt: '青花矾红荸荠瓶文物图' },
-  { src: '/assets/company-artifacts/artifact-16.png', className: 'a16', alt: '骑马俑文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618423768489984.png', className: 'a01', alt: '刘贺玉印文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618425747243008.png', className: 'a02', alt: '青金石文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618425906626560.png', className: 'a03', alt: 'T形帛画文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618427563376640.png', className: 'a04', alt: '佛像文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618427714371584.png', className: 'a05', alt: '狻猊文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618428997828608.png', className: 'a06', alt: '猪尊文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618429854425088.png', className: 'a07', alt: '皿方罍文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618430903001088.png', className: 'a08', alt: '竖琴乐俑文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618431855108096.png', className: 'a09', alt: '竖琴乐俑文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618432684621824.png', className: 'a10', alt: '金杯文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618433801265152.png', className: 'a11', alt: '金饰牌文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618434237472768.png', className: 'a12', alt: '铜奔马文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618435750658048.png', className: 'a13', alt: '陶单耳杯文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618435830349824.png', className: 'a14', alt: '青瓷执壶文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618436555964416.png', className: 'a15', alt: '青花矾红荸荠瓶文物图' },
+  { src: 'https://img.shuziwenbo.cn/7/20260605/1JMrHO1QPF4UX/299618437433532416.png', className: 'a16', alt: '骑马俑文物图' },
 ];
 
 const businessItems = [
@@ -52,7 +52,7 @@ export default function Company() {
             key={item.src}
             style={{ '--artifact-delay': `-${index * 680}ms` }}
           >
-            <img src={assetPath(item.src)} alt="" />
+            <img src={assetPath(item.src)} alt="" loading="lazy" decoding="async" />
           </span>
         ))}
       </div>
